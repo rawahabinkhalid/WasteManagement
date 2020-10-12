@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Language" content="en" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Admin Panel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+    <meta name="description" content="This is an example dashboard created using build-in elements and components." />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <!--
+    =========================================================
+    * ArchitectUI HTML Theme Dashboard - v1.0.0
+    =========================================================
+    * Product Page: https://dashboardpack.com
+    * Copyright 2019 DashboardPack (https://dashboardpack.com)
+    * Licensed under MIT (https://github.com/DashboardPack/architectui-html-theme-free/blob/master/LICENSE)
+    =========================================================
+    * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+    -->
+    <link href="./main.css" rel="stylesheet" />
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-auth.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-database.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-storage.js"></script>
+    <style>
+        /* Tabs*/
+        
+        .card .mb-3 {
+            margin-bottom: 0px !important;
+        }
+        
+        ul.nav li {
+            text-align: center;
+        }
+        
+        section {
+            padding: 20px 0px 0px 0px;
+        }
+        
+        section .section-title {
+            text-align: center;
+            color: #f1f4f6;
+            margin-bottom: 50px;
+            text-transform: uppercase;
+        }
+        
+        #tabs {
+            background: #f1f4f6;
+            color: #eee;
+        }
+        
+        #tabs h6.section-title {
+            color: #eee;
+        }
+        
+        #tabs .nav-tabs .nav-item.show .nav-link,
+        .nav-tabs .nav-link.active {
+            color: #f3f3f3;
+            background-color: transparent;
+            border-color: transparent transparent #f3f3f3;
+            border-bottom: 4px solid !important;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        #tabs .nav-tabs .nav-link {
+            border: 1px solid transparent;
+            border-top-left-radius: .25rem;
+            border-top-right-radius: .25rem;
+            color: #000;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!------ Include the above in your HEAD tag ---------->
+
+    <!-- Tabs -->
+
+    <!-- ./Tabs -->
+    <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
+        <div class="app-header header-shadow">
+            <div class="app-header__logo">
+                <div class="logo-src"></div>
+                <div class="header__pane ml-auto">
+                    <div>
+                        <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="app-header__mobile-menu">
+                <div>
+                    <button type="button" class="hamburger hamburger--elastic mobile-toggle-nav">
+                        <span class="hamburger-box">
+                            <span class="hamburger-inner"></span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+            <div class="app-header__menu">
+                <span>
+                    <button type="button"
+                        class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
+                        <span class="btn-icon-wrapper">
+                            <i class="fa fa-ellipsis-v fa-w-6"></i>
+                        </span>
+                </button>
+                </span>
+            </div>
+            <div class="app-header__content">
+                <div class="app-header-right">
+                    <div class="header-btn-lg pr-0">
+                        <div class="widget-content p-0">
+                            <div class="widget-content-wrapper">
+                                <div class="widget-content-left">
+                                    <div class="btn-group">
+                                        <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
+                                            <i class="fa fa-angle-down ml-2 opacity-8"></i>
+                                        </a>
+                                        <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
+                                            <div tabindex="-1" class="dropdown-divider"></div>
+                                            <button type="button" tabindex="0" class="dropdown-item">
+                                                Logout
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="widget-content-left  ml-3 header-user-info">
+                                    <div class="widget-heading">
+                                        Admin
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="app-main">
+            <div class="app-sidebar sidebar-shadow">
+                <div class="scrollbar-sidebar">
+                    <div class="app-sidebar__inner">
+                        <ul class="vertical-nav-menu">
+                            <li class="app-sidebar__heading">Dashboards</li>
+                            <li>
+                                <a href="dashboard.html" class="mm-active">
+                                    <i class="metismenu-icon pe-7s-rocket"></i> Dashboard
+                                </a>
+                            </li>
+                            <li>
+                                <a href="tickets.html">
+                                    <i class="metismenu-icon pe-7s-diamond"></i> Tickets
+                                </a>
+                            </li>
+                            <li>
+                                <a href="report.html">
+                                    <i class="metismenu-icon pe-7s-car"></i> Reports
+                                </a>
+                            </li>
+                            <li>
+                                <a href="duereport.html">
+                                    <i class="metismenu-icon pe-7s-display2"></i> Due Assignment Report
+                                </a>
+                            </li>
+                            <li>
+                                <a href="graphs.html">
+                                    <i class="metismenu-icon pe-7s-mouse"> </i>Graphical Reports
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="app-main__outer">
+                <div class="app-main__inner">
+                    <section id="tabs">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12 ">
+                                    <nav>
+                                        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                                            <a class="nav-item nav-link active" id="nav-home-tab" style="flex-direction: column;" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Today</a>
+                                            <a class="nav-item nav-link" id="nav-profile-tab" style="flex-direction: column;" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">This
+                                                Month</a>
+                                            <a class="nav-item nav-link" id="nav-contact-tab" style="flex-direction: column;" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Till
+                                                Date</a>
+
+                                        </div>
+                                    </nav>
+                                    <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                            <div class="row">
+                                                <div class="col-md-1 col-xl-1">
+                                                </div>
+                                                <div class="col-md-8 col-xl-8">
+                                                    <!-- <h1 style="text-align: center;">Today</h1> -->
+                                                    <div class="card mb-3 widget-content" style="border: 0px solid; background: transparent; padding: 0px; box-shadow: none;">
+                                                        <!-- <div class="card mb-3 widget-content bg-midnight-bloom"> -->
+                                                        <div class="widget-content-wrapper text-black-50">
+                                                            <div class="card mb-3" style="text-align: center; padding: 1rem; margin: 1rem 0rem 1rem 1rem; border-radius: .5rem;">
+                                                                <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">TOTAL</span><br />
+                                                                <h1 id="todayTotal">0</h1>
+                                                            </div>
+                                                            <div class="card mb-3" style="text-align: center; margin: 1rem 0rem 1rem 1rem; padding: 1rem; border-radius: .5rem;">
+                                                                <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">ACTIVE</span><br />
+                                                                <h1 id="todayActive">0</h1>
+                                                            </div>
+                                                            <div class="card mb-3" style="text-align: center; padding: 1rem; margin: 1rem 0rem 1rem 1rem; border-radius: .5rem;">
+                                                                <!-- <div class="card col-md-2" style="text-align: center;background: #88b9ff; padding: 1rem; border-radius: 0px;"> -->
+                                                                <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">ASSIGNED</span><br />
+                                                                <h1 id="todayAssigned">0</h1>
+                                                            </div>
+                                                            <div class="card  mb-3" style="text-align: center; margin: 1rem 0rem 1rem 1rem; padding: 1rem; border-radius: .5rem;">
+                                                                <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">INVALID</span><br />
+                                                                <h1 id="todayInvalid">0</h1>
+                                                            </div>
+                                                            <div class="card mb-3" style="text-align: center; margin: 1rem 0rem 1rem 1rem; padding: 1rem; border-radius: .5rem;">
+                                                                <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">REJECTED</span><br />
+                                                                <h1 id="todayRejected">0</h1>
+                                                            </div>
+                                                            <div class="card mb-3" style="text-align: center; margin: 1rem 0rem 1rem 1rem; padding: 1rem; border-radius: .5rem;">
+                                                                <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">REOPEN</span><br />
+                                                                <h1 id="todayReopen">0</h1>
+                                                            </div>
+                                                            <div class="card mb-3" style="text-align: center; margin: 1rem 0rem 1rem 1rem; padding: 1rem; border-radius: .5rem;">
+                                                                <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">RESOLVED</span><br />
+                                                                <h1 id="todayResolved">0</h1>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                            <div class="row">
+                                                <div class="col-md-1 col-xl-1">
+                                                </div>
+                                                <div class="col-md-8 col-xl-8">
+                                                    <!-- <h1 style="text-align: center;">This Month</h1> -->
+                                                    <div class="card mb-3 widget-content" style="border: 0px solid; background: transparent; padding: 0px; box-shadow: none;">
+                                                        <!-- <div class="card mb-3 widget-content" style="padding: 0px;"> -->
+                                                        <!-- <div class="card mb-3 widget-content bg-midnight-bloom"> -->
+                                                        <div class="widget-content-wrapper text-black-50">
+                                                            <div class="card mb-3" style="text-align: center; margin: 1rem 0rem 1rem 1rem; padding: 1rem; border-radius: .5rem;">
+                                                                <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">TOTAL</span><br />
+                                                                <h1 id="monthTotal">0</h1>
+                                                            </div>
+                                                            <div class="card mb-3" style="text-align: center; margin: 1rem 0rem 1rem 1rem; padding: 1rem; border-radius: .5rem;">
+                                                                <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">ACTIVE</span><br />
+                                                                <h1 id="monthActive">0</h1>
+                                                            </div>
+                                                            <div class="card mb-3" style="text-align: center; margin: 1rem 0rem 1rem 1rem; padding: 1rem; border-radius: .5rem;">
+                                                                <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">ASSIGNED</span><br />
+                                                                <h1 id="monthAssigned">0</h1>
+                                                            </div>
+                                                            <div class="card mb-3" style="text-align: center; margin: 1rem 0rem 1rem 1rem; padding: 1rem; border-radius: .5rem;">
+                                                                <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">INVALID</span><br />
+                                                                <h1 id="monthInvalid">0</h1>
+                                                            </div>
+                                                            <div class="card mb-3" style="text-align: center; margin: 1rem 0rem 1rem 1rem; padding: 1rem; border-radius: .5rem;">
+                                                                <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">REJECTED</span><br />
+                                                                <h1 id="monthRejected">0</h1>
+                                                            </div>
+                                                            <div class="card mb-3" style="text-align: center; margin: 1rem 0rem 1rem 1rem; padding: 1rem; border-radius: .5rem;">
+                                                                <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">REOPEN</span><br />
+                                                                <h1 id="monthReopen">0</h1>
+                                                            </div>
+                                                            <div class="card mb-3" style="text-align: center; margin: 1rem 0rem 1rem 1rem; padding: 1rem; border-radius: .5rem;">
+                                                                <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">RESOLVED</span><br />
+                                                                <h1 id="monthResolved">0</h1>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                                            <div class="row">
+                                                <div class="col-md-1 col-xl-1">
+                                                </div>
+                                                <div class="col-md-8 col-xl-8">
+                                                    <!-- <h1 style="text-align: center;">Till Date</h1>-->
+                                                    <div class="card mb-3 widget-content" style="border: 0px solid; background: transparent; padding: 0px; box-shadow: none;">
+
+                                                        <!-- <div class="card mb-3 widget-content" style="padding: 0px;"> -->
+                                                        <!-- <div class="card mb-3 widget-content bg-midnight-bloom"> -->
+                                                        <div class="widget-content-wrapper text-black-50">
+                                                            <div class="card mb-3" style="text-align: center; margin: 1rem 0rem 1rem 1rem; padding: 1rem; border-radius: .5rem;">
+                                                                <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">TOTAL</span><br />
+                                                                <h1 id="tillDateTotal">0</h1>
+                                                            </div>
+                                                            <div class="card mb-3" style="text-align: center; margin: 1rem 0rem 1rem 1rem; padding: 1rem; border-radius: .5rem;">
+                                                                <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">ACTIVE</span><br />
+                                                                <h1 id="tillDateActive">0</h1>
+                                                            </div>
+                                                            <div class="card mb-3" style="text-align: center; margin: 1rem 0rem 1rem 1rem; padding: 1rem; border-radius: .5rem;">
+                                                                <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">ASSIGNED</span><br />
+                                                                <h1 id="tillDateAssigned">0</h1>
+                                                            </div>
+                                                            <div class="card mb-3" style="text-align: center; margin: 1rem 0rem 1rem 1rem; padding: 1rem; border-radius: .5rem;">
+                                                                <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">INVALID</span><br />
+                                                                <h1 id="tillDateInvalid">0</h1>
+                                                            </div>
+                                                            <div class="card mb-3" style="text-align: center; margin: 1rem 0rem 1rem 1rem; padding: 1rem; border-radius: .5rem;">
+                                                                <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">REJECTED</span><br />
+                                                                <h1 id="tillDateRejected">0</h1>
+                                                            </div>
+                                                            <div class="card mb-3" style="text-align: center; margin: 1rem 0rem 1rem 1rem; padding: 1rem; border-radius: .5rem;">
+                                                                <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">REOPEN</span><br />
+                                                                <h1 id="tillDateReopen">0</h1>
+                                                            </div>
+                                                            <div class="card mb-3" style="text-align: center; margin: 1rem 0rem 1rem 1rem; padding: 1rem; border-radius: .5rem;">
+                                                                <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">RESOLVED</span><br />
+                                                                <h1 id="tillDateResolved">0</h1>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+
+
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12">
+                            <div class="mb-3 card">
+                                <div class="card-header-tab card-header-tab-animation card-header">
+                                    <div class="card-header-title">
+                                        <i class="header-icon lnr-apartment icon-gradient bg-love-kiss">
+                                        </i> Monthly Complaint
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade show active" id="tabs-eg-77">
+                                            <div class="card mb-3 widget-chart widget-chart2 text-left w-100">
+                                                <div class="widget-chat-wrapper-outer">
+                                                    <div class="widget-chart-wrapper widget-chart-wrapper-lg opacity-10 m-0">
+                                                        <canvas id="myChart"></canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="row">
+                        <div class="col-lg-1">
+                            <select class="form-control" id="mySelector" class="styled-select slate">
+                <option value="" disabled selected>Select District</option>
+                <option value="South">South</option>
+                <option value="East">East</option>
+              </select>
+                        </div>
+                        <div class="col-lg-1">
+                            <select class="form-control" id="zone_id" onchange="zoneChanged();">
+                <option value="" disabled selected>Zones</option>
+              </select>
+                        </div>
+                        <div class="col-lg-1">
+                            <select class="form-control" id="uc">
+                <option value="" disabled selected>UCs</option>
+              </select>
+                        </div>
+                        <div class="col-lg-4"></div>
+                        <div class="col-lg-2">
+                            <input type="date" class="forms-controls" name="" id="" placeholder="" />
+                        </div>
+                        <div class="col-lg-2">
+                            <input type="date" class="forms-controls" name="" id="" placeholder="" />
+                        </div>
+                        <div class="col-lg-1">
+                            <button class="btn btn-success">Search</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="main-card mb-3 card">
+                            <div class="card-body">
+                                <h5 class="card-title">Summary</h5>
+                                <table class="mb-0 table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Status</th>
+                                            <th>Count</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Active</td>
+                                            <td>0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Assigned</td>
+                                            <td>0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Invalid</td>
+                                            <td>0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Rejected</td>
+                                            <td>0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Reopen</td>
+                                            <td>0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Resolved</td>
+                                            <td>0</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                    <div class="app-wrapper-footer">
+                        <div class="app-footer">
+                            <div class="app-footer__inner">
+                                <div class="app-footer-left">
+                                    <ul class="nav">
+                                        <li class="nav-item">
+                                            <a href="javascript:void(0);" class="nav-link">
+                                                Copy Rights MATZ Solutions
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <script src="http://maps.google.com/maps/api/js?sensor=true"></script> -->
+            </div>
+        </div>
+        <script type="text/javascript" src="./assets/scripts/main.js"></script>
+        <script type="text/javascript" src="./assets/scripts/myscript.js"></script>
+        <script src="../vendor/jquery/jquery-3.2.1.min.js"></script>
+        <script src="../js/firebase.js"></script>
+        <script>
+            // var dateTemp = new Date(2018, 8, 24, 10, 33, 30);
+            // var monthArray = Array();
+            // month = dateTemp.getMonth();
+            // for (iter = 0; iter < 12; iter++) {
+            //   monthArray[iter] = ''+
+            //   console.log(month);
+            //   month -= 1;
+            //   if (month <= 0) month = 12;
+            // }
+
+            var last12Month = function() {
+                var dates = [];
+                var today = new Date();
+                (d = new Date()), (y = d.getFullYear()), (m = d.getMonth());
+
+                function padMonth(month) {
+                    if (month < 10) return "0" + month;
+                    else return month;
+                }
+                if (m === 11) {
+                    for (var i = 1; i < 13; i++) dates.push(y + "-" + padMonth(i));
+                } else {
+                    for (var i = m + 1; i < m + 13; i++) {
+                        if (i % 12 > m) dates.push(y - 1 + "-" + padMonth(i + 1));
+                        else dates.push(y + "-" + padMonth((i % 12) + 1));
+                    }
+                }
+
+                return dates;
+            };
+            // console.log(last12Month());
+            var last12Active = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+            var last12Assigned = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+            var last12Invalid = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+            var last12Rejected = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+            var last12Reopen = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+            var last12Resolved = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+            var last12Months = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+            last12Months = last12Month();
+            // console.log(last12Months);
+            // // console.log(
+            // //   last12Months.indexOf("2019-10") >= 0
+            // //     ? last12Months.indexOf("2019-10")
+            // //     : ""
+            // // );
+
+            var active = 0;
+            var assigned = 0;
+            var resolved = 0;
+            var rejected = 0;
+            var reopen = 0;
+            var invalid = 0;
+            var total = 0;
+
+            var activeCM = 0;
+            var assignedCM = 0;
+            var resolvedCM = 0;
+            var rejectedCM = 0;
+            var reopenCM = 0;
+            var invalidCM = 0;
+            var totalCM = 0;
+
+            var activeToday = 0;
+            var assignedToday = 0;
+            var resolvedToday = 0;
+            var rejectedToday = 0;
+            var reopenToday = 0;
+            var invalidToday = 0;
+            var totalToday = 0;
+
+            var database = firebase.database();
+            var date = new Date();
+            var currentMonth = parseInt(date.getMonth()) + 1;
+            var currentMonth1 = parseInt(date.getMonth()) + 1;
+            var today =
+                date.getFullYear() + "/" + currentMonth + "/" + date.getDate();
+            // console.log(userId)
+            database.ref("users/").on("value", function(snapshot) {
+                // setTimeout(() => {
+                // last12Active = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                // last12Assigned = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                // last12Invalid = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                // last12Rejected = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                // last12Reopen = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                // last12Resolved = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                // last12Months = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+                active = 0;
+                assigned = 0;
+                resolved = 0;
+                rejected = 0;
+                reopen = 0;
+                invalid = 0;
+                total = 0;
+
+                activeCM = 0;
+                assignedCM = 0;
+                resolvedCM = 0;
+                rejectedCM = 0;
+                reopenCM = 0;
+                invalidCM = 0;
+                totalCM = 0;
+
+                activeToday = 0;
+                assignedToday = 0;
+                resolvedToday = 0;
+                rejectedToday = 0;
+                reopenToday = 0;
+                invalidToday = 0;
+                totalToday = 0;
+                // }, 100);
+
+                if (snapshot.exists()) {
+                    var content = "";
+                    // $('#list_complaint').html(content);
+                    // var i = 1;
+                    snapshot.forEach(function(data) {
+                        // i++;
+                        // var val = data.val();
+                        var key = data.key;
+                        // console.log(val2);
+                        database.ref("users/" + key + "/").on("value", function(snapshot1) {
+                            if (snapshot1.exists()) {
+                                var currentDate = "";
+                                // var content = "";
+                                snapshot1.forEach(function(data1) {
+                                    var val = data1.val();
+                                    status = isset(val.status) ? val.status : "ACTIVE";
+                                    // console.log(val.complainNumber + ' | ' + val.currentDate + ' | ' + status);
+                                    // if (status != 'RESOLVED' && status != 'REJECTED' && status != 'INVALID') {
+                                    total = parseInt(total) + 1;
+                                    if (status == "ACTIVE") active = parseInt(active) +
+                                        1;
+                                    else if (status == "ASSIGNED")
+                                        assigned = parseInt(assigned) + 1;
+                                    else if (status == "RESOLVED")
+                                        resolved = parseInt(resolved) + 1;
+                                    else if (status == "REJECTED")
+                                        rejected = parseInt(rejected) + 1;
+                                    else if (status == "REOPEN") reopen = parseInt(
+                                        reopen) + 1;
+                                    else if (status == "INVALID") invalid = parseInt(
+                                        invalid) + 1;
+                                    currentDate = val.currentDate.split(" ")[0].split(
+                                        "/")[1];
+                                    // console.log(currentDate + ' | ' + currentMonth1 + ' | ' + status);
+                                    if (currentDate == currentMonth1) {
+                                        totalCM = parseInt(totalCM) + 1;
+                                        if (status == "ACTIVE") activeCM = parseInt(
+                                            activeCM) + 1;
+                                        else if (status == "ASSIGNED")
+                                            assignedCM = parseInt(assignedCM) + 1;
+                                        else if (status == "RESOLVED")
+                                            resolvedCM = parseInt(resolvedCM) + 1;
+                                        else if (status == "REJECTED")
+                                            rejectedCM = parseInt(rejectedCM) + 1;
+                                        else if (status == "REOPEN") {
+                                            reopenCM = parseInt(reopenCM) + 1;
+                                        } else if (status == "INVALID")
+                                            invalidCM = parseInt(invalidCM) + 1;
+                                    }
+                                    currentMonth = val.currentDate.split(" ")[0].split(
+                                        "/")[1];
+                                    currentYear = val.currentDate.split(" ")[0].split(
+                                        "/")[0];
+                                    // console.log(last12Months);
+                                    // console.log(currentYear + "-" + currentMonth);
+                                    if (
+                                        last12Months.indexOf(currentYear + "-" +
+                                            currentMonth) >= 0
+                                    ) {
+                                        // console.log(val.currentDate);
+                                        if (status == "ACTIVE") {
+                                            last12Active[
+                                                last12Months.indexOf(currentYear +
+                                                    "-" + currentMonth)
+                                            ]++;
+                                        } else if (status == "ASSIGNED") {
+                                            // assignedToday = parseInt(assignedToday) + 1;
+                                            last12Assigned[
+                                                last12Months.indexOf(currentYear +
+                                                    "-" + currentMonth)
+                                            ]++;
+                                        } else if (status == "RESOLVED") {
+                                            // resolvedToday = parseInt(resolvedToday) + 1;
+                                            last12Resolved[
+                                                last12Months.indexOf(currentYear +
+                                                    "-" + currentMonth)
+                                            ]++;
+                                        } else if (status == "REJECTED") {
+                                            // rejectedToday = parseInt(rejectedToday) + 1;
+                                            last12Rejected[
+                                                last12Months.indexOf(currentYear +
+                                                    "-" + currentMonth)
+                                            ]++;
+                                        } else if (status == "REOPEN") {
+                                            // reopenToday = parseInt(reopenToday) + 1;
+                                            last12Reopen[
+                                                last12Months.indexOf(currentYear +
+                                                    "-" + currentMonth)
+                                            ]++;
+                                        } else if (status == "INVALID") {
+                                            // invalidToday = parseInt(invalidToday) + 1;
+                                            last12Invalid[
+                                                last12Months.indexOf(currentYear +
+                                                    "-" + currentMonth)
+                                            ]++;
+                                        }
+                                    }
+                                    // console.log(last12Active);
+                                    currentDate = val.currentDate.split(" ")[0];
+                                    // console.log(currentDate + ' | ' + today);
+                                    if (currentDate == today) {
+                                        totalToday = parseInt(totalToday) + 1;
+                                        if (status == "ACTIVE")
+                                            activeToday = parseInt(activeToday) + 1;
+                                        else if (status == "ASSIGNED")
+                                            assignedToday = parseInt(assignedToday) + 1;
+                                        else if (status == "RESOLVED")
+                                            resolvedToday = parseInt(resolvedToday) + 1;
+                                        else if (status == "REJECTED")
+                                            rejectedToday = parseInt(rejectedToday) + 1;
+                                        else if (status == "REOPEN")
+                                            reopenToday = parseInt(reopenToday) + 1;
+                                        else if (status == "INVALID")
+                                            invalidToday = parseInt(invalidToday) + 1;
+                                    }
+                                });
+                                // console.log(content);
+                                $("#todayTotal").html(totalToday);
+                                $("#todayActive").html(activeToday);
+                                $("#todayAssigned").html(assignedToday);
+                                $("#todayResolved").html(resolvedToday);
+                                $("#todayRejected").html(rejectedToday);
+                                $("#todayReopen").html(reopenToday);
+                                $("#todayInvalid").html(invalidToday);
+
+                                $("#monthTotal").html(totalCM);
+                                $("#monthActive").html(activeCM);
+                                $("#monthAssigned").html(assignedCM);
+                                $("#monthResolved").html(resolvedCM);
+                                $("#monthRejected").html(rejectedCM);
+                                $("#monthReopen").html(reopenCM);
+                                $("#monthInvalid").html(invalidCM);
+
+                                $("#tillDateTotal").html(total);
+                                $("#tillDateActive").html(active);
+                                $("#tillDateAssigned").html(assigned);
+                                $("#tillDateResolved").html(resolved);
+                                $("#tillDateRejected").html(rejected);
+                                $("#tillDateReopen").html(reopen);
+                                $("#tillDateInvalid").html(invalid);
+                            }
+                        });
+                    });
+                }
+                drawGraph();
+                // window.open('dashboard.html', '')
+                // location.reload(false);
+                setTimeout(() => {
+                    last12Active = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                    last12Assigned = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                    last12Invalid = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                    last12Rejected = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                    last12Reopen = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                    last12Resolved = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                    last12Months = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                }, 100);
+
+            });
+
+            function isset(ref) {
+                return typeof ref !== "undefined";
+            }
+
+            $(document).ready(function() {
+                drawGraph();
+                $("#mySelector").on("change", function(e) {
+                    districtChanged();
+                    inputClient = document.getElementById("mySelector");
+                    filterClient = inputClient.value.toUpperCase();
+                    // console.log(filterClient);
+                    table = document.getElementById("list_complaint1");
+                    tr = table.getElementsByTagName("tr");
+                    // console.log(tr[0]);
+                    for (i = 1; i < tr.length; i++) {
+                        // console.log(i);
+                        // console.log(tr[i].getElementsByTagName("td")[0]);
+                        tdClient = tr[i].getElementsByTagName("td")[6];
+                        txtValueClient = tdClient.innerText;
+                        // console.log(txtValueClient.toUpperCase());
+                        if (inputClient.value != "")
+                            if (txtValueClient.toUpperCase().includes(filterClient)) {
+                                // else if (inputClient.value != '')
+                                tr[i].style.display = "";
+                            } else {
+                                tr[i].style.display = "none";
+                            }
+                    }
+                });
+
+                $("#zone_id").on("change", function(e) {
+                    // districtChanged();
+                    inputClient = document.getElementById("zone_id");
+                    filterClient = inputClient.value.toUpperCase();
+                    // console.log(filterClient);
+                    table = document.getElementById("list_complaint1");
+                    tr = table.getElementsByTagName("tr");
+                    // console.log(tr[0]);
+                    for (i = 1; i < tr.length; i++) {
+                        // console.log(i);
+                        // console.log(tr[i].getElementsByTagName("td")[0]);
+                        tdClient = tr[i].getElementsByTagName("td")[7];
+                        txtValueClient = tdClient.innerText;
+                        // console.log(txtValueClient.toUpperCase());
+                        if (inputClient.value != "")
+                            if (txtValueClient.toUpperCase().includes(filterClient)) {
+                                // else if (inputClient.value != '')
+                                tr[i].style.display = "";
+                            } else {
+                                tr[i].style.display = "none";
+                            }
+                    }
+                });
+                $("#uc").on("change", function(e) {
+                    // districtChanged();
+                    inputClient = document.getElementById("uc");
+                    uc = findUC($("#zone_id").val(), $("#uc").val());
+                    filterClient = uc.toUpperCase();
+                    // console.log(filterClient);
+                    table = document.getElementById("list_complaint1");
+                    tr = table.getElementsByTagName("tr");
+                    // console.log(tr[0]);
+                    for (i = 1; i < tr.length; i++) {
+                        // console.log(i);
+                        // console.log(tr[i].getElementsByTagName("td")[0]);
+                        tdClient = tr[i].getElementsByTagName("td")[6];
+                        txtValueClient = tdClient.innerText;
+                        // console.log(txtValueClient.toUpperCase());
+                        if (inputClient.value != "")
+                            if (txtValueClient.toUpperCase().includes(filterClient)) {
+                                // else if (inputClient.value != '')
+                                tr[i].style.display = "";
+                            } else {
+                                tr[i].style.display = "none";
+                            }
+                    }
+                });
+            });
+
+            function zoneChanged() {
+                var lyari =
+                    '<option value="">Select Union council</option><option value="1">UC-1: Agra Taj Colony</option><option value="2">UC-2: Hingorabad, Daryabad</option><option value="3">UC-3: Liaquat Colony</option><option value="4">UC-4: Nawa Abad</option><option value="5">UC-5: Khadda Market Memon Society</option><option value="6">UC-6: Moosa Lane</option><option value="7">UC-7: Baghdadi</option><option value="8">UC-8: Shah Bagh Lane</option><option value="9">UC-9: Bihar Colony</option><option value="10">UC-10: Ghulistan Colony</option><option value="11">UC-11: Rangi wara</option><option value="12">UC-12: Saeedabad , Singo Lane</option><option value="13">UC-13: Rexer Lane</option><option value="14">UC-14: Kalakot</option><option value="15">UC-15: Nawa Lane</option><option value="63">Motor Vehicle Operator</option><option value="93">Emergency Team - Lyari</option><option value="105">Motor Vehicle Coolies</option><option value="107">Road Gang: Mirza Adam Khan</option><option value="109">Road Gang:Shah Waliullah</option><option value="110">Road Gang: Shah Bhitai</option><option value="111">Road Gang: Tenary</option><option value="112">Road Gang: Chakiwara</option><option value="113">Road Gang: Mewa Shah</option><option value="114">Road Gang: Faqeer M.Dura Khan</option><option value="115">Road Gang: Mehrab Khan Essa Khan</option>';
+                var saddar =
+                    '<option value="">Select Union council</option><option value="16">UC-16: Old Haji Camp</option><option value="17">UC-17: Ghanchi Para</option><option value="18">UC-18: Ghazi Nagar</option><option value="19">UC-19: Garden</option><option value="20">UC-20: Millat Nagar</option><option value="21">UC-21: Ghazdar Abad</option><option value="22">UC-22: Ranchore Lane</option><option value="23">UC-23: Nanak Wara</option><option value="24">UC-24: Mithadar, Old Town</option><option value="25">UC-25: Kharadar</option><option value="26">UC-26: City Railway Colony</option><option value="27">UC-27: Ratan Talao</option><option value="28">UC-28: Saddar</option><option value="29">UC-29: Civil Lane</option><option value="30">UC-30: Clifton</option><option value="31">UC-31: Kehkashan</option><option value="64">Motor Vehicle Operator</option><option value="92">Emergency Team - Saddar</option><option value="99">Road Gang: M.A Jinnah Road</option><option value="100">Road Gang: Teen Talwar Clifton</option><option value="104">Motor Vehicle Coolies</option>';
+                var officeSouth =
+                    '<option value="">Select Union council</option><option value="80">Office-L</option><option value="94">Pool Staff</option><option value="101">Administrative Staff</option><option value="102">Workshop Staff</option><option value="103">Motor Vehicle Operators</option><option value="106">Other Staff</option>';
+                var jamshed =
+                    '<option value="">Select Union council</option><option value="32">UC-1: Akhter Colony</option><option value="33">UC-2: Manzoor Colony-I</option><option value="34">UC-3: Azam Basti</option><option value="35">UC-4: Chanesar Goth</option><option value="36">UC-5: Mehmood Abad</option><option value="37">UC-6: Manzoor Colony-II</option><option value="38">UC-7: PECHS-I</option><option value="39">UC-8: PECHS-II</option><option value="40">UC-9: Jutt Land Lines</option><option value="41">UC-10: Centrel Jacob Line</option><option value="42">UC-11: Behind Jacob Line</option><option value="43">UC-13: Jamsheed Quarters</option><option value="44">UC-14: Fatima Jinnah Colony</option><option value="45">UC-15: Garden East</option><option value="46">UC-16: Sodier Bazaar</option><option value="47">UC-17: Pakistan Quarters</option><option value="65">Workshop-J</option><option value="68">Road Gang: Express Way</option><option value="75">UC-7: PECHS-I C</option><option value="76">UC-7: PECHS-I D</option><option value="77">UC-8: PECHS-II B</option><option value="79">Jamshed Office</option><option value="97">Emergency Team-2 - Jamshed</option><option value="98">Emergency Team - Jamshed</option>';
+                var gulshan =
+                    '<option value="">Select Union council</option><option value="48">UC-12: Dehli Mercantile Society</option><option value="49">UC-18: Civic Centre</option><option value="50">UC-19: PIB Colony</option><option value="51">UC-20: Essa Nagri</option><option value="52">UC-21: Gulshan e Iqbal</option><option value="53">UC-22: Gilani Railway Station</option><option value="54">UC-23: Shanti Nagar</option><option value="55">UC-24: Jamali Colony</option><option value="56">UC-25: Gulshan e Iqbal-II</option><option value="57">UC-26: New Dhoraji</option><option value="58">UC-27: Pahlwan Goth</option><option value="59">UC-28: Metrovil Colony</option><option value="60">UC-29: Gulzaar e Hijri</option><option value="61">UC-30: Safooran</option><option value="62">UC-31: Gujhro</option><option value="66">Workshop-G</option><option value="69">Road Gang: NED to Safoorah Chowk</option><option value="71">Road Gang: Hassan Square to Nipa</option><option value="72">Road Gang: Karsaz to Essa Nagri</option><option value="73">Road Gang: Shaheed-e-Millat Road</option><option value="74">Road Gang: NIPA to NED University</option><option value="78">Gulshan Office</option><option value="91">Road Gang: Rashid Minhas Road</option><option value="95">Emergency Team - Gulshan</option><option value="96">Road Gang: Jail Road to Hassan Square</option><option value="108">SSWMB-HQ</option>';
+                if (document.getElementById("zone_id").value == "1")
+                    document.getElementById("uc").innerHTML = lyari;
+                else if (document.getElementById("zone_id").value == "2")
+                    document.getElementById("uc").innerHTML = saddar;
+                else if (document.getElementById("zone_id").value == "8")
+                    document.getElementById("uc").innerHTML = officeSouth;
+                else if (document.getElementById("zone_id").value == "3")
+                    document.getElementById("uc").innerHTML = jamshed;
+                else if (document.getElementById("zone_id").value == "4")
+                    document.getElementById("uc").innerHTML = gulshan;
+                else
+                    document.getElementById("uc").innerHTML =
+                    '<option value="">Select Union council</option>';
+            }
+
+            function districtChanged() {
+                var south =
+                    '<option value="">Select Zone</option><option value="1">Lyari</option><option value="2">Saddar</option><option value="8">Office-South</option>';
+                var east =
+                    '<option value="">Select Zone</option><option value="3">Jamshed</option><option value="4">Gulshan</option>';
+                if (document.getElementById("mySelector").value == "South")
+                    document.getElementById("zone_id").innerHTML = south;
+                else if (document.getElementById("mySelector").value == "East")
+                    document.getElementById("zone_id").innerHTML = east;
+                else
+                    document.getElementById("zone_id").innerHTML =
+                    '<option value="">Select Zone</option>';
+            }
+        </script>
+        <script>
+            function drawGraph() {
+                // IIFE - Immediately Invoked Function Expression
+                (function(code) {
+                    code(window.jQuery, window, document);
+                })(function($, window, document) {
+                    var exportPdfBtn = null;
+                    var tableReport = $("#table-report");
+
+                    $(function() {
+                        // var dateSelector = $(".filters input[type=date]");
+
+                        // dateSelector.on("change", function() {
+                        //   var params = [];
+                        //   params[$(this).attr("name")] = $(this).val();
+                        //   filterChange(params);
+                        // });
+
+                        // var filterOption = $(".filters .filter ul li");
+                        // filterOption.on("click", function() {
+                        //   var params = [];
+                        //   var filterId = $(this).attr("data-id");
+                        //   var filterScope = $(this)
+                        //     .closest("ul")
+                        //     .attr("data-scope");
+                        //   if (filterScope === "district") {
+                        //     params["zone"] = "";
+                        //     params["uc"] = "";
+                        //   } else if (filterScope === "zone") {
+                        //     params["uc"] = "";
+                        //   }
+                        //   params[filterScope] = filterId;
+                        //   filterChange(params);
+                        // });
+
+                        var ctx = document.getElementById("myChart");
+                        var myChart = new Chart(document.getElementById("myChart"), {
+                            type: "bar",
+                            data: {
+                                labels: last12Months,
+                                // labels: [
+                                //     "",
+                                //     "2018-11",
+                                //     "2018-12",
+                                //     "2019-01",
+                                //     "2019-02",
+                                //     "2019-03",
+                                //     "2019-04",
+                                //     "2019-05",
+                                //     "2019-06",
+                                //     "2019-07",
+                                //     "2019-08",
+                                //     "2019-09",
+                                //     "2019-10",
+                                //     "2019-11",
+                                //     "2019-12"
+                                // ],
+                                datasets: [{
+                                    label: "ACTIVE",
+                                    data: last12Active,
+                                    backgroundColor: "#ffca43"
+                                }, {
+                                    label: "ASSIGNED",
+                                    data: last12Assigned,
+                                    backgroundColor: "#88b9ff"
+                                }, {
+                                    label: "INVALID",
+                                    data: last12Invalid,
+                                    backgroundColor: "#454545"
+                                }, {
+                                    label: "REJECTED",
+                                    data: last12Rejected,
+                                    backgroundColor: "#f58231"
+                                }, {
+                                    label: "REOPEN",
+                                    data: last12Reopen,
+                                    backgroundColor: "#ee2222"
+                                }, {
+                                    label: "RESOLVED",
+                                    data: last12Resolved,
+                                    backgroundColor: "#7bce45"
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    xAxes: [{
+                                        // barThickness: 25,
+                                    }]
+                                },
+                                title: {
+                                    display: true,
+                                    text: "Monthly (Complaint)"
+                                }
+                            }
+                        });
+
+                        // $("#serchby").click(function() {
+                        //   var from = $("#from").val();
+                        //   var to = $("#todate").val();
+
+                        //   if (Date.parse(from) > Date.parse(to)) {
+                        //     alert("End Date Must be Greater or Equal To  Start Date.");
+                        //     return false;
+                        //   }
+                        //   var params = [];
+                        //   params["from"] = from;
+                        //   params["to"] = to;
+                        //   filterChange(params);
+                        // });
+
+                        ///////////////
+
+                        function filterChange(newParams) {
+                            var detaultParams = {};
+                            detaultParams["date"] = "2019-12-16";
+                            detaultParams["district"] = "";
+                            detaultParams["zone"] = "0";
+                            detaultParams["uc"] = "0";
+                            detaultParams["contact"] = "";
+                            detaultParams["ticket_id"] = "0";
+                            detaultParams["status"] = "";
+                            detaultParams["from"] = "2019-12-16";
+                            detaultParams["to"] = "2019-12-16";
+                            detaultParams["export"] = "";
+                            detaultParams["date_end"] = "2019-12-16";
+                            detaultParams["supervisor"] = "0";
+
+                            var params = Object.assign(detaultParams, newParams);
+
+                            var url = "http://cms.changyikangjie.com/dashboard?";
+                            console.log("clicked:", url + $.param(params));
+                            window.location.href = url + $.param(params);
+                        }
+                    });
+
+                    // $('#from').datepicker({
+                    //   dateFormat: 'yy-mm-dd'
+                    // });
+                    // $('#todate').datepicker({
+                    //   dateFormat: 'yy-mm-dd',
+                    //   minDate: 0
+                    // });
+                });
+            }
+        </script>
+</body>
+
+</html>

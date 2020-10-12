@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Edit Complaints</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+    <meta name="description" content="Build whatever layout you need with our Architect framework.">
+    <meta name="msapplication-tap-highlight" content="no">
+    <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-auth.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-database.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-storage.js"></script>
+    <!--
+    =========================================================
+    * ArchitectUI HTML Theme Dashboard - v1.0.0
+    =========================================================
+    * Product Page: https://dashboardpack.com
+    * Copyright 2019 DashboardPack (https://dashboardpack.com)
+    * Licensed under MIT (https://github.com/DashboardPack/architectui-html-theme-free/blob/master/LICENSE)
+    =========================================================
+    * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+    -->
+    <link href="./main.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
+        <div class="app-header header-shadow">
+            <div class="app-header__logo">
+                <div class="logo-src"></div>
+                <div class="header__pane ml-auto">
+                    <div>
+                        <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="app-header__mobile-menu">
+                <div>
+                    <button type="button" class="hamburger hamburger--elastic mobile-toggle-nav">
+                        <span class="hamburger-box">
+                            <span class="hamburger-inner"></span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+            <div class="app-header__menu">
+                <span>
+                    <button type="button"
+                        class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
+                        <span class="btn-icon-wrapper">
+                            <i class="fa fa-ellipsis-v fa-w-6"></i>
+                        </span>
+                </button>
+                </span>
+            </div>
+            <div class="app-header__content">
+                <div class="app-header-right">
+                    <div class="header-btn-lg pr-0">
+                        <div class="widget-content p-0">
+                            <div class="widget-content-wrapper">
+                                <div class="widget-content-left">
+                                    <div class="btn-group">
+                                        <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
+                                            <i class="fa fa-angle-down ml-2 opacity-8"></i>
+                                        </a>
+                                        <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
+                                            <div tabindex="-1" class="dropdown-divider"></div>
+                                            <button type="button" tabindex="0" class="dropdown-item">Logout</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="widget-content-left  ml-3 header-user-info">
+                                    <div class="widget-heading">
+                                        Admin
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="app-main">
+            <div class="app-sidebar sidebar-shadow">
+                <div class="scrollbar-sidebar">
+                    <div class="app-sidebar__inner">
+                        <ul class="vertical-nav-menu">
+                            <li class="app-sidebar__heading">Dashboards</li>
+                            <li>
+                                <a href="dashboard.html">
+                                    <i class="metismenu-icon pe-7s-rocket"></i> Dashboard
+                                </a>
+                            </li>
+                            <li>
+                                <a href="tickets.html" class="mm-active">
+                                    <i class="metismenu-icon pe-7s-diamond"></i> Tickets
+                                </a>
+                            </li>
+                            <li>
+                                <a href="report.html">
+                                    <i class="metismenu-icon pe-7s-car"></i> Reports
+                                </a>
+                            </li>
+                            <li>
+                                <a href="duereport.html">
+                                    <i class="metismenu-icon pe-7s-display2"></i> Due Assignment Report
+                                </a>
+                            </li>
+                            <li>
+                                <a href="graphs.html">
+                                    <i class="metismenu-icon pe-7s-mouse">
+                                    </i>Graphical Reports
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="app-main__outer">
+                <div class="app-main__inner">
+                    <div class="app-page-title">
+                        <div class="page-title-wrapper">
+                            <div class="page-title-heading">
+                                <div class="page-title-icon">
+                                    <i class="fas fa-edit">
+                                    </i>
+                                </div>
+                                <div>Edit Complaint
+                                </div>
+                            </div>
+                            <div class="page-title-actions">
+                                <div class="d-inline-block dropdown">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane tabs-animation fade show active" id="tab-content-0" role="tabpanel">
+                            <div class="main-card mb-3 card">
+                                <div class="card-body">
+                                    <!-- <form class=""> -->
+                                    <div class="form-row">
+                                        <div class="col-md-6">
+                                            <div class="position-relative form-group"><label for="" class="">Name</label><input name="name" id="name" placeholder="Enter Name" type="text" class="form-control"></div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="position-relative form-group"><label for="" class="">Contact</label><input name="contact" id="contact" placeholder="Enter Contact" type="number" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-4">
+                                            <div class="position-relative form-group">
+                                                <label for="exampleAddress" class="">District</label>
+                                                <select class="form-control" id="district" onchange="districtChanged();">
+                                                        <option value="" disabled selected>Select District</option>
+                                                        <option value="South">South</option>
+                                                        <option value="East">East</option>
+                                                    </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="position-relative form-group">
+                                                <label for="exampleAddress" class="">Zone</label>
+                                                <select name="zone_id" id="zone_id" class="form-control" onchange="zoneChanged();">
+                                                            <option value="">Select Zone</option>
+                                                    </select>
+                                                <!-- <select class="form-control">
+                                                        <option value="" disabled selected>Select Zones</option>
+                                                        <option value="">1</option>
+                                                        <option value="">2</option>
+                                                    </select> -->
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="position-relative form-group">
+                                                <label for="exampleAddress" class="">Union Concil</label>
+                                                <select class="form-control" id="uc">
+                                                        <option value="">Select Union council</option>
+                                                        <!-- <option value="">1</option>
+                                                        <option value="">2</option> -->
+                                                    </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="position-relative form-group">
+                                        <label for="exampleAddress" class="">Supervisor</label>
+                                        <select class="form-control" id="supervisor" name="supervisor">
+                                                <option value="" disabled selected>Select Supervisor</option>
+                                                <option value="ABC">ABC</option>
+                                                <option value="XYZ">XYZ</option>
+                                            </select>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-6">
+                                            <div class="position-relative form-group">
+                                                <label for="" class="">Location Name</label>
+                                                <input name="location" id="location" placeholder="Enter Location" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="position-relative form-group">
+                                                <label for="" class="">Latitude</label>
+                                                <input name="latitude" id="latitude" placeholder="Latitude" type="text" class="form-control" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="position-relative form-group">
+                                                <label for="" class="">Longitude</label>
+                                                <input name="longitude" id="longitude" placeholder="Longitude" type="text" class="form-control" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+
+                                        <div class="col-md-4">
+                                            <div class="position-relative form-group">
+                                                <label for="exampleAddress" class="">Resolving Time</label>
+                                                <!-- <select class="form-control">
+                                                        <option value="" disabled selected>Resolution Duration</option>
+                                                        <option value="">2 Hours</option>
+                                                        <option value="">4 Hours</option>
+                                                        <option value="">6 Hours</option>
+                                                        <option value="">8 Hours</option>
+                                                        <option value="">10 Hours</option>
+                                                        <option value="">12 Hours</option>
+                                                    </select> -->
+
+                                                <select class="form-control" id="resolving_duration" name="resolving_duration"><option disabled selected="selected" value="">Resolution Duration</option><option value="2">2 Hours</option><option value="4">4 Hours</option><option value="6">6 Hours</option><option value="8">8 Hours</option><option value="10">10 Hours</option><option value="12">12 Hours</option><option value="14">14 Hours</option><option value="16">16 Hours</option><option value="18">18 Hours</option><option value="20">20 Hours</option><option value="22">22 Hours</option><option value="24">24 Hours</option><option value="26">26 Hours</option><option value="28">28 Hours</option><option value="30">30 Hours</option><option value="32">32 Hours</option><option value="34">34 Hours</option><option value="36">36 Hours</option><option value="38">38 Hours</option><option value="40">40 Hours</option><option value="42">42 Hours</option><option value="44">44 Hours</option><option value="46">46 Hours</option><option value="48">48 Hours</option><option value="50">50 Hours</option><option value="52">52 Hours</option><option value="54">54 Hours</option><option value="56">56 Hours</option><option value="58">58 Hours</option><option value="60">60 Hours</option><option value="62">62 Hours</option><option value="64">64 Hours</option><option value="66">66 Hours</option><option value="68">68 Hours</option><option value="70">70 Hours</option><option value="72">72 Hours</option></select>                                                </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="position-relative form-group">
+                                                <label for="exampleAddress" class="">Status</label>
+                                                <select class="form-control" id="status" name="status"><option selected disabled value="">Select Status</option><option value="ACTIVE">ACTIVE</option><option value="ASSIGNED">ASSIGNED</option><option value="RESOLVED">RESOLVED</option><option value="REJECTED">REJECTED</option><option value="REOPEN">REOPEN</option><option value="INVALID">INVALID</option></select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="position-relative form-group">
+                                                <label for="exampleAddress" class="">Type/Category</label>
+                                                <!-- <select class="form-control">
+                                                        <option value="" disabled selected>Select Type</option>
+                                                        <option value="">Type 1</option>
+                                                        <option value="">Type 2</option>
+                                                        <option value="">Type 3</option>
+                                                        <option value="">Type 4</option>
+                                                        <option value="">Type 5</option>
+                                                    </select> -->
+                                                <select class="form-control" id="type" name="category"><option disabled selected value="">Select Type</option><option value="Waste collection">Waste collection</option><option value="Washing and sprinkling demand">Washing and sprinkling demand</option><option value="Sweeping related complaint">Sweeping related complaint</option><option value="Staff related complaint">Staff related complaint</option><option value="Removal of waste from open plots">Removal of waste from open plots</option><option value="Removal of open heaps">Removal of open heaps</option><option value="Removal of de-silated  material">Removal of de-silated  material</option><option value="Removal of dead animals">Removal of dead animals</option><option value="Removal of construction and demolition waste">Removal of construction and demolition waste</option><option value="Non-Availability of garbage bags">Non-Availability of garbage bags</option><option value="Non subjective">Non subjective</option><option value="Littering during waste transportation">Littering during waste transportation</option><option value="Free collection from commercial areas">Free collection from commercial areas</option><option value="Delayed DTD waste collection">Delayed DTD waste collection</option><option value="Container related complaint">Container related complaint</option><option value="Clogging of road side open drains">Clogging of road side open drains</option><option value="Other">Other</option></select>                                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-6">
+                                            <div class="position-relative form-group">
+                                                <input name="fileImage" id="fileImage" placeholder="" accept="image/*" type="file" class="form-control" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <button class="mt-2 btn btn-primary" id="btnComplaint" onclick="saveData();">Add Complaint</button>
+                                    <input type="hidden" id="btnUserId">
+                                    <input type="hidden" id="deviceId">
+                                    <input type="hidden" id="photoUri">
+                                    <input type="hidden" id="complaintNo">
+                                    <input type="hidden" id="complaintDate">
+                                    <!-- </form> -->
+                                </div>
+                            </div>
+                            <div class="main-card mb-3 card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Select Location From Map</h5>
+                                    <div class="map">
+                                        <!-- <iframe src="https://maps.google.com/maps?q=24.917474,67.126181&hl=en&z=16&amp;output=embed" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="app-wrapper-footer">
+                    <div class="app-footer">
+                        <div class="app-footer__inner">
+                            <div class="app-footer-left">
+                                <ul class="nav">
+                                    <li class="nav-item">
+                                        <a href="javascript:void(0);" class="nav-link">
+                                            Copy Rights MATZ Solutions
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/firebase.js"></script>
+    <script type="text/javascript" src="./assets/scripts/main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDIR3obQzbVKB7B4e2EM-1ws1f_tvWIn4&sensor=false"></script> -->
+    <script>
+        function districtChanged() {
+            var south = '<option value="">Select Zone</option><option value="1">Lyari</option><option value="2">Saddar</option><option value="8">Office-South</option>';
+            var east = '<option value="">Select Zone</option><option value="3">Jamshed</option><option value="4">Gulshan</option>';
+            if (document.getElementById('district').value == 'South')
+                document.getElementById('zone_id').innerHTML = south;
+            else if (document.getElementById('district').value == 'East')
+                document.getElementById('zone_id').innerHTML = east;
+            else
+                document.getElementById('zone_id').innerHTML = '<option value="">Select Zone</option>';
+        }
+
+        function zoneChanged() {
+            var lyari = '<option value="">Select Union council</option><option value="1">UC-1: Agra Taj Colony</option><option value="2">UC-2: Hingorabad, Daryabad</option><option value="3">UC-3: Liaquat Colony</option><option value="4">UC-4: Nawa Abad</option><option value="5">UC-5: Khadda Market Memon Society</option><option value="6">UC-6: Moosa Lane</option><option value="7">UC-7: Baghdadi</option><option value="8">UC-8: Shah Bagh Lane</option><option value="9">UC-9: Bihar Colony</option><option value="10">UC-10: Ghulistan Colony</option><option value="11">UC-11: Rangi wara</option><option value="12">UC-12: Saeedabad , Singo Lane</option><option value="13">UC-13: Rexer Lane</option><option value="14">UC-14: Kalakot</option><option value="15">UC-15: Nawa Lane</option><option value="63">Motor Vehicle Operator</option><option value="93">Emergency Team - Lyari</option><option value="105">Motor Vehicle Coolies</option><option value="107">Road Gang: Mirza Adam Khan</option><option value="109">Road Gang:Shah Waliullah</option><option value="110">Road Gang: Shah Bhitai</option><option value="111">Road Gang: Tenary</option><option value="112">Road Gang: Chakiwara</option><option value="113">Road Gang: Mewa Shah</option><option value="114">Road Gang: Faqeer M.Dura Khan</option><option value="115">Road Gang: Mehrab Khan Essa Khan</option>';
+            var saddar = '<option value="">Select Union council</option><option value="16">UC-16: Old Haji Camp</option><option value="17">UC-17: Ghanchi Para</option><option value="18">UC-18: Ghazi Nagar</option><option value="19">UC-19: Garden</option><option value="20">UC-20: Millat Nagar</option><option value="21">UC-21: Ghazdar Abad</option><option value="22">UC-22: Ranchore Lane</option><option value="23">UC-23: Nanak Wara</option><option value="24">UC-24: Mithadar, Old Town</option><option value="25">UC-25: Kharadar</option><option value="26">UC-26: City Railway Colony</option><option value="27">UC-27: Ratan Talao</option><option value="28">UC-28: Saddar</option><option value="29">UC-29: Civil Lane</option><option value="30">UC-30: Clifton</option><option value="31">UC-31: Kehkashan</option><option value="64">Motor Vehicle Operator</option><option value="92">Emergency Team - Saddar</option><option value="99">Road Gang: M.A Jinnah Road</option><option value="100">Road Gang: Teen Talwar Clifton</option><option value="104">Motor Vehicle Coolies</option>';
+            var officeSouth = '<option value="">Select Union council</option><option value="80">Office-L</option><option value="94">Pool Staff</option><option value="101">Administrative Staff</option><option value="102">Workshop Staff</option><option value="103">Motor Vehicle Operators</option><option value="106">Other Staff</option>';
+            var jamshed = '<option value="">Select Union council</option><option value="32">UC-1: Akhter Colony</option><option value="33">UC-2: Manzoor Colony-I</option><option value="34">UC-3: Azam Basti</option><option value="35">UC-4: Chanesar Goth</option><option value="36">UC-5: Mehmood Abad</option><option value="37">UC-6: Manzoor Colony-II</option><option value="38">UC-7: PECHS-I</option><option value="39">UC-8: PECHS-II</option><option value="40">UC-9: Jutt Land Lines</option><option value="41">UC-10: Centrel Jacob Line</option><option value="42">UC-11: Behind Jacob Line</option><option value="43">UC-13: Jamsheed Quarters</option><option value="44">UC-14: Fatima Jinnah Colony</option><option value="45">UC-15: Garden East</option><option value="46">UC-16: Sodier Bazaar</option><option value="47">UC-17: Pakistan Quarters</option><option value="65">Workshop-J</option><option value="68">Road Gang: Express Way</option><option value="75">UC-7: PECHS-I C</option><option value="76">UC-7: PECHS-I D</option><option value="77">UC-8: PECHS-II B</option><option value="79">Jamshed Office</option><option value="97">Emergency Team-2 - Jamshed</option><option value="98">Emergency Team - Jamshed</option>';
+            var gulshan = '<option value="">Select Union council</option><option value="48">UC-12: Dehli Mercantile Society</option><option value="49">UC-18: Civic Centre</option><option value="50">UC-19: PIB Colony</option><option value="51">UC-20: Essa Nagri</option><option value="52">UC-21: Gulshan e Iqbal</option><option value="53">UC-22: Gilani Railway Station</option><option value="54">UC-23: Shanti Nagar</option><option value="55">UC-24: Jamali Colony</option><option value="56">UC-25: Gulshan e Iqbal-II</option><option value="57">UC-26: New Dhoraji</option><option value="58">UC-27: Pahlwan Goth</option><option value="59">UC-28: Metrovil Colony</option><option value="60">UC-29: Gulzaar e Hijri</option><option value="61">UC-30: Safooran</option><option value="62">UC-31: Gujhro</option><option value="66">Workshop-G</option><option value="69">Road Gang: NED to Safoorah Chowk</option><option value="71">Road Gang: Hassan Square to Nipa</option><option value="72">Road Gang: Karsaz to Essa Nagri</option><option value="73">Road Gang: Shaheed-e-Millat Road</option><option value="74">Road Gang: NIPA to NED University</option><option value="78">Gulshan Office</option><option value="91">Road Gang: Rashid Minhas Road</option><option value="95">Emergency Team - Gulshan</option><option value="96">Road Gang: Jail Road to Hassan Square</option><option value="108">SSWMB-HQ</option>';
+            if (document.getElementById('zone_id').value == '1')
+                document.getElementById('uc').innerHTML = lyari;
+            else if (document.getElementById('zone_id').value == '2')
+                document.getElementById('uc').innerHTML = saddar;
+            else if (document.getElementById('zone_id').value == '8')
+                document.getElementById('uc').innerHTML = officeSouth;
+            else if (document.getElementById('zone_id').value == '3')
+                document.getElementById('uc').innerHTML = jamshed;
+            else if (document.getElementById('zone_id').value == '4')
+                document.getElementById('uc').innerHTML = gulshan;
+            else
+                document.getElementById('uc').innerHTML = '<option value="">Select Union council</option>';
+        }
+        var userID = '';
+        var url = window.location.href;
+        var splitURL = url.split("?");
+        if (isset(splitURL[1]))
+            if (splitURL[1].includes("id="))
+                complaintID = splitURL[1].split("id=")[1];
+            else
+                window.open('tickets.html', '_self');
+        else
+            window.open('tickets.html', '_self');
+
+        var database = firebase.database();
+        // console.log(complaintID);
+        database.ref('users/').once('value', function(snapshot) {
+            if (snapshot.exists()) {
+                snapshot.forEach(function(data) {
+                    if (data.child(complaintID).exists()) {
+                        var key = data.key;
+                        document.getElementById('btnUserId').value = key;
+                        database.ref('users/' + key + '/' + complaintID + '/').once('value', function(snapshot1) {
+                            if (snapshot1.exists()) {
+                                var val = snapshot1.val();
+                                document.getElementById('name').value = val.name;
+                                document.getElementById('complaintNo').value = (isset(val.complainNumber)) ? val.complainNumber : '';
+                                document.getElementById('complaintDate').value = (isset(val.currentDate)) ? val.currentDate : '';
+                                document.getElementById('contact').value = val.phoneNumber;
+                                document.getElementById('btnComplaint').value = complaintID;
+                                document.getElementById('district').value = (isset(val.district)) ? val.district : '';
+                                districtChanged();
+                                document.getElementById('zone_id').value = (isset(val.zone_id)) ? val.zone_id : '';
+                                zoneChanged();
+                                document.getElementById('uc').value = (isset(val.uc)) ? val.uc : '';
+                                document.getElementById('deviceId').value = (isset(val.deviceId)) ? val.deviceId : '';
+                                document.getElementById('supervisor').value = isset(val.supervisor) ? val.supervisor : '';
+                                document.getElementById('photoUri').value = (isset(val.photoUri)) ? val.photoUri : '';
+                                document.getElementById('status').value = (isset(val.status)) ? val.status : '';
+                                document.getElementById('location').value = (isset(val.location)) ? val.location : '';
+                                document.getElementById('latitude').value = (isset(val.latitudee)) ? val.latitudee : '';
+                                document.getElementById('longitude').value = (isset(val.longitudee)) ? val.longitudee : '';
+                                document.getElementById('resolving_duration').value = (isset(val.resolving_duration)) ? val.resolving_duration : '';
+                                document.getElementById('type').value = (isset(val.CompainType)) ? val.CompainType : '';
+                                // console.log('<iframe src="https://maps.google.com/maps?q=' + val.latitudee + ',' + val.longitudee + '&hl=en&z=16&amp;output=embed" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>');
+                                document.getElementsByClassName('map')[0].innerHTML = '<iframe src="https://maps.google.com/maps?q=' + val.latitudee + ',' + val.longitudee + '&hl=en&z=16&amp;output=embed" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>';
+                            }
+                        });
+                    }
+                });
+            }
+        });
+
+        // var database = firebase.database();
+        // database.ref('users/').once('value', function(snapshot) {
+        //     if (snapshot.exists()) {
+        //         snapshot.forEach(function(data) {
+        //             var key = data.key;
+        //             var url = window.location.href;
+        //             var splitURL = url.split("?");
+        //             if (isset(splitURL[1]))
+        //                 if (splitURL[1].includes("id="))
+        //                     complaintID = splitURL[1].split("id=")[1];
+        //                 else
+        //                     window.open('tickets.html', '_self');
+        //             else
+        //                 window.open('tickets.html', '_self');
+        //             database.ref('users/' + key + '/' + complaintID + '/').on('value', function(snapshot1) {
+        //                 if (snapshot1.exists()) {
+        //                     snapshot1.forEach(function(data1) {
+        //                         var val = data1.val();
+
+        //                         // if (data1.key == complaintID) {
+        //                         document.getElementById('name').value = val.name;
+        //                         document.getElementById('contact').value = val.phoneNumber;
+        //                         document.getElementById('btnComplaint').value = data1.key;
+        //                         // }
+        //                     });
+        //                 }
+        //             });
+        //         });
+        //     }
+        // });
+
+        function isset(ref) {
+            return typeof ref !== 'undefined';
+        }
+
+        function saveData() {
+            if (isset(document.getElementById('fileImage')) && $('#fileImage').get(0).files.length !== 0) {
+                var downloadURLGlobal = "";
+                var storageRef = firebase.storage().ref();
+                var uploadTask = storageRef.child('/' + document.getElementById("fileImage").files[0].name).put(document.getElementById("fileImage").files[0]);
+                uploadTask.on('state_changed', function(snapshot) {
+                    var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    console.log('Upload is ' + progress + '% done');
+                    switch (snapshot.state) {
+                        case firebase.storage.TaskState.PAUSED: // or 'paused'
+                            console.log('Upload is paused');
+                            break;
+                        case firebase.storage.TaskState.RUNNING: // or 'running'
+                            console.log('Upload is running');
+                            break;
+                    }
+                }, function(error) {
+                    // Handle unsuccessful uploads
+                }, function() {
+                    uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+                        downloadURLGlobal = downloadURL;
+                        var database = firebase.database();
+                        var key = document.getElementById('btnUserId').value;
+                        var complaintID = document.getElementById('btnComplaint').value;
+                        var name = document.getElementById('name').value;
+                        var complaintDate = document.getElementById('complaintDate').value;
+                        var complainNumber = document.getElementById('complaintNo').value;
+                        var phoneNumber = document.getElementById('contact').value;
+                        var supervisor = document.getElementById('supervisor').value;
+                        var deviceId = document.getElementById('deviceId').value;
+                        var photoUri = document.getElementById('photoUri').value;
+                        var district = document.getElementById('district').value;
+                        var zone_id = document.getElementById('zone_id').value;
+                        var uc = document.getElementById('uc').value;
+                        var location = document.getElementById('location').value;
+                        var status = document.getElementById('status').value;
+                        var latitude = document.getElementById('latitude').value;
+                        var longitude = document.getElementById('longitude').value;
+                        var resolving_duration = document.getElementById('resolving_duration').value;
+                        var CompainType = document.getElementById('type').value;
+
+                        database.ref('users/' + key + '/' + complaintID + '/').update({
+                            deviceId: deviceId,
+                            name: name,
+                            phoneNumber: phoneNumber,
+                            photoUriAdmin: downloadURLGlobal,
+                            photoUri: photoUri,
+                            district: district,
+                            zone_id: zone_id,
+                            uc: uc,
+                            status: status,
+                            location: location,
+                            latitude: latitude,
+                            longitude: longitude,
+                            resolving_duration: resolving_duration,
+                            CompainType: CompainType,
+                            supervisor: supervisor,
+                            currentDate: complaintDate,
+                            complainNumber: complainNumber
+                        });
+
+                        alert("Complain saved Successfully.");
+                        // location.reload();
+                        window.open('tickets.html', '_self');
+                    });
+                });
+            } else {
+
+                // }
+                var database = firebase.database();
+                var key = document.getElementById('btnUserId').value;
+                var complaintID = document.getElementById('btnComplaint').value;
+                var name = document.getElementById('name').value;
+                var complaintDate = document.getElementById('complaintDate').value;
+                var complainNumber = document.getElementById('complaintNo').value;
+                var phoneNumber = document.getElementById('contact').value;
+                var supervisor = document.getElementById('supervisor').value;
+                var deviceId = document.getElementById('deviceId').value;
+                var photoUri = document.getElementById('photoUri').value;
+                var district = document.getElementById('district').value;
+                var zone_id = document.getElementById('zone_id').value;
+                var uc = document.getElementById('uc').value;
+                var location = document.getElementById('location').value;
+                var status = document.getElementById('status').value;
+                var latitude = document.getElementById('latitude').value;
+                var longitude = document.getElementById('longitude').value;
+                var resolving_duration = document.getElementById('resolving_duration').value;
+                var CompainType = document.getElementById('type').value;
+
+                database.ref('users/' + key + '/' + complaintID + '/').update({
+                    deviceId: deviceId,
+                    name: name,
+                    phoneNumber: phoneNumber,
+                    photoUri: photoUri,
+                    district: district,
+                    zone_id: zone_id,
+                    uc: uc,
+                    status: status,
+                    location: location,
+                    latitude: latitude,
+                    longitude: longitude,
+                    resolving_duration: resolving_duration,
+                    CompainType: CompainType,
+                    supervisor: supervisor,
+                    currentDate: complaintDate,
+                    complainNumber: complainNumber
+                });
+                setTimeout(() => {
+                    window.open('tickets.html', '_self');
+                }, 500);
+
+            }
+        }
+    </script>
+</body>
+
+</html>

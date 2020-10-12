@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Dashboard</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="../images/logo.png">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Tempusdominus Bbootstrap 4 -->
+    <link rel="stylesheet" href="../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- JQVMap -->
+    <!-- <link rel="stylesheet" href="../plugins/jqvmap/jqvmap.min.css"> -->
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../dist/css/adminlte.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Daterange picker -->
+    <!-- <link rel="stylesheet" href="../plugins/daterangepicker/daterangepicker.css"> -->
+    <!-- summernote -->
+    <!-- <link rel="stylesheet" href="../plugins/summernote/summernote-bs4.css"> -->
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!-- <link href="./main.css" rel="stylesheet" /> -->
+    <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-auth.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-database.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-storage.js"></script>
+
+    <style>
+        canvas {
+            /* width: 500px !important;
+      height: 500px !important; */
+            margin: 0 auto;
+        }
+    </style>
+    <link href="my_files/app.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> -->
+    <!-- <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
+    <style type="text/css">
+        /* Chart.js */
+        /*
+ * DOM element rendering detection
+ * https://davidwalsh.name/detect-node-insertion
+ */
+        
+        @keyframes chartjs-render-animation {
+            from {
+                opacity: 0.99;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .chartjs-render-monitor {
+            animation: chartjs-render-animation 0.001s;
+        }
+        /*
+ * DOM element resizing detection
+ * https://github.com/marcj/css-element-queries
+ */
+        
+        .chartjs-size-monitor,
+        .chartjs-size-monitor-expand,
+        .chartjs-size-monitor-shrink {
+            position: absolute;
+            direction: ltr;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            pointer-events: none;
+            visibility: hidden;
+            z-index: -1;
+        }
+        
+        .chartjs-size-monitor-expand>div {
+            position: absolute;
+            width: 1000000px;
+            height: 1000000px;
+            left: 0;
+            top: 0;
+        }
+        
+        .chartjs-size-monitor-shrink>div {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+        <div id="mynavbar">
+
+        </div>
+        <!-- /.sidebar-menu -->
+        <!-- /.sidebar -->
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0 text-dark">Dashboard</h1>
+                        </div>
+                        <!-- /.col -->
+                        <!-- <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">Dashboard v1</li>
+              </ol> -->
+                        <!-- </div>/.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="col-xs-12 page display-sheet">
+                        <!-- <div class="row">
+                            <div class="col-md-12 col-xl-12">
+                                <h1 style="text-align: center;">Today</h1>
+                                <div class="card mb-3 widget-content" style="padding: 0px;">
+                                    <div class="widget-content-wrapper text-white">
+                                        <div class="card col-md-1" style="text-align: center;background: #469990; padding: 1rem; border-radius: 0px;">
+                                            <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">TOTAL</span><br />
+                                            <h1 id="todayTotal">0</h1>
+                                        </div>
+                                        <div class="card col-md-2" style="text-align: center;background: #ffca43; padding: 1rem; border-radius: 0px;">
+                                            <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">ACTIVE</span><br />
+                                            <h1 id="todayActive">0</h1>
+                                        </div>
+                                        <div class="card col-md-2" style="text-align: center;background: #88b9ff; padding: 1rem; border-radius: 0px;">
+                                            <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">ASSIGNED</span><br />
+                                            <h1 id="todayAssigned">0</h1>
+                                        </div>
+                                        <div class="card col-md-2" style="text-align: center;background: #454545; padding: 1rem; border-radius: 0px;">
+                                            <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">INVALID</span><br />
+                                            <h1 id="todayInvalid">0</h1>
+                                        </div>
+                                        <div class="card col-md-2" style="text-align: center;background: #f58231; padding: 1rem; border-radius: 0px;">
+                                            <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">REJECTED</span><br />
+                                            <h1 id="todayRejected">0</h1>
+                                        </div>
+                                        <div class="card col-md-1" style="text-align: center;background: #ee2222; padding: 1rem; border-radius: 0px;">
+                                            <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">REOPEN</span><br />
+                                            <h1 id="todayReopen">0</h1>
+                                        </div>
+                                        <div class="card col-md-2" style="text-align: center;background: #7bce45; padding: 1rem; border-radius: 0px;">
+                                            <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">RESOLVED</span><br />
+                                            <h1 id="todayResolved">0</h1>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-xl-12">
+                                <h1 style="text-align: center;">This Month</h1>
+                                <div class="card mb-3 widget-content" style="padding: 0px;">
+                                    <div class="widget-content-wrapper text-white">
+                                        <div class="card col-md-1" style="text-align: center;background: #469990; padding: 1rem; border-radius: 0px;">
+                                            <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">TOTAL</span><br />
+                                            <h1 id="monthTotal">0</h1>
+                                        </div>
+                                        <div class="card col-md-2" style="text-align: center;background: #ffca43; padding: 1rem; border-radius: 0px;">
+                                            <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">ACTIVE</span><br />
+                                            <h1 id="monthActive">0</h1>
+                                        </div>
+                                        <div class="card col-md-2" style="text-align: center;background: #88b9ff; padding: 1rem; border-radius: 0px;">
+                                            <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">ASSIGNED</span><br />
+                                            <h1 id="monthAssigned">0</h1>
+                                        </div>
+                                        <div class="card col-md-2" style="text-align: center;background: #454545; padding: 1rem; border-radius: 0px;">
+                                            <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">INVALID</span><br />
+                                            <h1 id="monthInvalid">0</h1>
+                                        </div>
+                                        <div class="card col-md-2" style="text-align: center;background: #f58231; padding: 1rem; border-radius: 0px;">
+                                            <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">REJECTED</span><br />
+                                            <h1 id="monthRejected">0</h1>
+                                        </div>
+                                        <div class="card col-md-1" style="text-align: center;background: #ee2222; padding: 1rem; border-radius: 0px;">
+                                            <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">REOPEN</span><br />
+                                            <h1 id="monthReopen">0</h1>
+                                        </div>
+                                        <div class="card col-md-2" style="text-align: center;background: #7bce45; padding: 1rem; border-radius: 0px;">
+                                            <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">RESOLVED</span><br />
+                                            <h1 id="monthResolved">0</h1>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-xl-12">
+                                <h1 style="text-align: center;">Till Date</h1>
+                                <div class="card mb-3 widget-content" style="padding: 0px;">
+                                    <div class="widget-content-wrapper text-white">
+                                        <div class="card col-md-1" style="text-align: center;background: #469990; padding: 1rem; border-radius: 0px;">
+                                            <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">TOTAL</span><br />
+                                            <h1 id="tillDateTotal">0</h1>
+                                        </div>
+                                        <div class="card col-md-2" style="text-align: center;background: #ffca43; padding: 1rem; border-radius: 0px;">
+                                            <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">ACTIVE</span><br />
+                                            <h1 id="tillDateActive">0</h1>
+                                        </div>
+                                        <div class="card col-md-2" style="text-align: center;background: #88b9ff; padding: 1rem; border-radius: 0px;">
+                                            <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">ASSIGNED</span><br />
+                                            <h1 id="tillDateAssigned">0</h1>
+                                        </div>
+                                        <div class="card col-md-2" style="text-align: center;background: #454545; padding: 1rem; border-radius: 0px;">
+                                            <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">INVALID</span><br />
+                                            <h1 id="tillDateInvalid">0</h1>
+                                        </div>
+                                        <div class="card col-md-2" style="text-align: center;background: #f58231; padding: 1rem; border-radius: 0px;">
+                                            <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">REJECTED</span><br />
+                                            <h1 id="tillDateRejected">0</h1>
+                                        </div>
+                                        <div class="card col-md-1" style="text-align: center;background: #ee2222; padding: 1rem; border-radius: 0px;">
+                                            <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">REOPEN</span><br />
+                                            <h1 id="tillDateReopen">0</h1>
+                                        </div>
+                                        <div class="card col-md-2" style="text-align: center;background: #7bce45; padding: 1rem; border-radius: 0px;">
+                                            <span style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">RESOLVED</span><br />
+                                            <h1 id="tillDateResolved">0</h1>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                        <div class="row">
+
+                            <div class="col-xs-4">
+
+                                <div class="row">
+                                    <div class=" col-xs-12">
+                                        <div class="dashboard-card graph-card">
+                                            <div class="row">
+                                                <div class="col-xs-12 text-capitalize alert-heading">
+                                                    <i class="fa fa-list-ol"></i> Complains
+                                                </div>
+                                            </div>
+
+                                            <div class="row cat-wrapper">
+                                                <div class="col-xs-12 text-center text-white">
+                                                    <div class="text-center col-md-12"
+                                                        style="text-align: center; font-size: 15px; color: black; font-weight: bold;">
+                                                        Today
+                                                    </div>
+                                                    <!-- <div class="text-center label">East Present Staff</div> -->
+                                                    <!-- <div class="dash-graph-wrapper"> -->
+                                                    <!-- <div class="chartjs-size-monitor"> -->
+                                                    <div class="card col-md-4"
+                                                        style="text-align: center;background: #469990; padding: 1rem; border-radius: 0px;">
+                                                        <span
+                                                            style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">TOTAL</span><br />
+                                                        <h1 id="todayTotal">0</h1>
+                                                    </div>
+                                                    <div class="card col-md-4"
+                                                        style="text-align: center;background: #ffca43; padding: 1rem; border-radius: 0px;">
+                                                        <span
+                                                            style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">ACTIVE</span><br />
+                                                        <h1 id="todayActive">0</h1>
+                                                    </div>
+                                                    <div class="card col-md-4"
+                                                        style="text-align: center;background: #88b9ff; padding: 1rem; border-radius: 0px;">
+                                                        <span
+                                                            style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">ASSIGNED</span><br />
+                                                        <h1 id="todayAssigned">0</h1>
+                                                    </div>
+                                                    <div class="card col-md-3"
+                                                        style="text-align: center;background: #454545; padding: 1rem; border-radius: 0px;">
+                                                        <span
+                                                            style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">INVALID</span><br />
+                                                        <h1 id="todayInvalid">0</h1>
+                                                    </div>
+                                                    <div class="card col-md-3"
+                                                        style="text-align: center;background: #f58231; padding: 1rem; border-radius: 0px;">
+                                                        <span
+                                                            style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">REJECTED</span><br />
+                                                        <h1 id="todayRejected">0</h1>
+                                                    </div>
+                                                    <div class="card col-md-3"
+                                                        style="text-align: center;background: #ee2222; padding: 1rem; border-radius: 0px;">
+                                                        <span
+                                                            style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">REOPEN</span><br />
+                                                        <h1 id="todayReopen">0</h1>
+                                                    </div>
+                                                    <div class="card col-md-3"
+                                                        style="text-align: center;background: #7bce45; padding: 1rem; border-radius: 0px;">
+                                                        <span
+                                                            style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">RESOLVED</span><br />
+                                                        <h1 id="todayResolved">0</h1>
+                                                    </div>
+
+                                                    <!-- <div class="card col-md-4"
+                                                        style="text-align: center;background: #454545; padding: 1rem; border-radius: 0px;">
+                                                        <span
+                                                            style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">INVALID</span><br />
+                                                        <h1 id="todayInvalid">0</h1>
+                                                    </div> -->
+
+                                                    <!-- </div> -->
+                                                    <!-- <canvas id="dist-cont-present-2" width="317" height="247" class="chartjs-render-monitor" style="display: block; width: 317px; height: 247px;"></canvas> -->
+                                                    <!-- </div> -->
+                                                </div>
+                                                <!-- <div class="col-xs-12 text-center">
+                                                    <div class="text-center label">South Present Staff</div>
+                                                    <div class="dash-graph-wrapper">
+                                                        <div class="chartjs-size-monitor">
+                                                            <div class="chartjs-size-monitor-expand">
+                                                                <div class=""></div>
+                                                            </div>
+                                                            <div class="chartjs-size-monitor-shrink">
+                                                                <div class=""></div>
+                                                            </div>
+                                                        </div>
+                                                        <canvas id="dist-cont-present-1" width="317" height="247" class="chartjs-render-monitor" style="display: block; width: 317px; height: 247px;"></canvas>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-xs-12 text-center ">
+                                                    <div class="text-center label">Total Present Staff</div>
+                                                    <div class="dash-graph-wrapper">
+                                                        <div class="chartjs-size-monitor">
+                                                            <div class="chartjs-size-monitor-expand">
+                                                                <div class=""></div>
+                                                            </div>
+                                                            <div class="chartjs-size-monitor-shrink">
+                                                                <div class=""></div>
+                                                            </div>
+                                                        </div>
+                                                        <canvas id="cont-present-pae" width="317" height="247" style="display: block; width: 317px; height: 247px;" class="chartjs-render-monitor"></canvas>
+                                                    </div>
+                                                </div> -->
+
+                                            </div>
+                                            <!-- <div class="row">
+                                                <div class="col-xs-12 text-capitalize alert-heading">
+                                                    <i class="fa fa-list-ol"></i> This Month
+                                                </div>
+                                            </div> -->
+
+                                            <div class="row cat-wrapper">
+                                                <div class="col-xs-12 text-center text-white">
+                                                    <div class="text-center col-md-12"
+                                                        style="text-align: center; font-size: 15px; color: black; font-weight: bold;">
+                                                        This Month
+                                                    </div>
+                                                    <!-- <div class="text-center label">East Present Staff</div> -->
+                                                    <!-- <div class="dash-graph-wrapper"> -->
+                                                    <!-- <div class="chartjs-size-monitor"> -->
+                                                    <div class="card col-md-4"
+                                                        style="text-align: center;background: #469990; padding: 1rem; border-radius: 0px;">
+                                                        <span
+                                                            style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">TOTAL</span><br />
+                                                        <h1 id="monthTotal">0</h1>
+                                                    </div>
+                                                    <div class="card col-md-4"
+                                                        style="text-align: center;background: #ffca43; padding: 1rem; border-radius: 0px;">
+                                                        <span
+                                                            style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">ACTIVE</span><br />
+                                                        <h1 id="monthActive">0</h1>
+                                                    </div>
+                                                    <div class="card col-md-4"
+                                                        style="text-align: center;background: #88b9ff; padding: 1rem; border-radius: 0px;">
+                                                        <span
+                                                            style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">ASSIGNED</span><br />
+                                                        <h1 id="monthAssigned">0</h1>
+                                                    </div>
+                                                    <div class="card col-md-3"
+                                                        style="text-align: center;background: #454545; padding: 1rem; border-radius: 0px;">
+                                                        <span
+                                                            style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">INVALID</span><br />
+                                                        <h1 id="monthInvalid">0</h1>
+                                                    </div>
+                                                    <div class="card col-md-3"
+                                                        style="text-align: center;background: #f58231; padding: 1rem; border-radius: 0px;">
+                                                        <span
+                                                            style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">REJECTED</span><br />
+                                                        <h1 id="monthRejected">0</h1>
+                                                    </div>
+                                                    <div class="card col-md-3"
+                                                        style="text-align: center;background: #ee2222; padding: 1rem; border-radius: 0px;">
+                                                        <span
+                                                            style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">REOPEN</span><br />
+                                                        <h1 id="monthReopen">0</h1>
+                                                    </div>
+                                                    <div class="card col-md-3"
+                                                        style="text-align: center;background: #7bce45; padding: 1rem; border-radius: 0px;">
+                                                        <span
+                                                            style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">RESOLVED</span><br />
+                                                        <h1 id="monthResolved">0</h1>
+                                                    </div>
+
+                                                    <!-- <div class="card col-md-4"
+                                                        style="text-align: center;background: #454545; padding: 1rem; border-radius: 0px;">
+                                                        <span
+                                                            style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">INVALID</span><br />
+                                                        <h1 id="todayInvalid">0</h1>
+                                                    </div> -->
+
+                                                    <!-- </div> -->
+                                                    <!-- <canvas id="dist-cont-present-2" width="317" height="247" class="chartjs-render-monitor" style="display: block; width: 317px; height: 247px;"></canvas> -->
+                                                    <!-- </div> -->
+                                                </div>
+                                                <!-- <div class="col-xs-12 text-center">
+                                                    <div class="text-center label">South Present Staff</div>
+                                                    <div class="dash-graph-wrapper">
+                                                        <div class="chartjs-size-monitor">
+                                                            <div class="chartjs-size-monitor-expand">
+                                                                <div class=""></div>
+                                                            </div>
+                                                            <div class="chartjs-size-monitor-shrink">
+                                                                <div class=""></div>
+                                                            </div>
+                                                        </div>
+                                                        <canvas id="dist-cont-present-1" width="317" height="247" class="chartjs-render-monitor" style="display: block; width: 317px; height: 247px;"></canvas>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-xs-12 text-center ">
+                                                    <div class="text-center label">Total Present Staff</div>
+                                                    <div class="dash-graph-wrapper">
+                                                        <div class="chartjs-size-monitor">
+                                                            <div class="chartjs-size-monitor-expand">
+                                                                <div class=""></div>
+                                                            </div>
+                                                            <div class="chartjs-size-monitor-shrink">
+                                                                <div class=""></div>
+                                                            </div>
+                                                        </div>
+                                                        <canvas id="cont-present-pae" width="317" height="247" style="display: block; width: 317px; height: 247px;" class="chartjs-render-monitor"></canvas>
+                                                    </div>
+                                                </div> -->
+
+                                            </div>
+                                            <!-- <div class="row">
+                                                <div class="col-xs-12 text-capitalize alert-heading">
+                                                    <i class="fa fa-list-ol"></i> Till Date
+                                                </div>
+                                            </div> -->
+
+                                            <div class="row cat-wrapper">
+                                                <div class="col-xs-12 text-center text-white">
+                                                    <div class="text-center col-md-12" style="text-align: center; font-size: 15px; color: black; font-weight: bold;">Till Date
+                                                    </div>
+                                                    <!-- <div class="text-center label">East Present Staff</div> -->
+                                                    <!-- <div class="dash-graph-wrapper"> -->
+                                                    <!-- <div class="chartjs-size-monitor"> -->
+                                                <div class="card col-md-4"
+                                                    style="text-align: center;background: #469990; padding: 1rem; border-radius: 0px;">
+                                                    <span
+                                                        style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">TOTAL</span><br />
+                                                    <h1 id="tillDateTotal">0</h1>
+                                                </div>
+                                                <div class="card col-md-4"
+                                                    style="text-align: center;background: #ffca43; padding: 1rem; border-radius: 0px;">
+                                                    <span
+                                                        style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">ACTIVE</span><br />
+                                                    <h1 id="tillDateActive">0</h1>
+                                                </div>
+                                                <div class="card col-md-4"
+                                                    style="text-align: center;background: #88b9ff; padding: 1rem; border-radius: 0px;">
+                                                    <span
+                                                        style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">ASSIGNED</span><br />
+                                                    <h1 id="tillDateAssigned">0</h1>
+                                                </div>
+                                                <div class="card col-md-3"
+                                                    style="text-align: center;background: #454545; padding: 1rem; border-radius: 0px;">
+                                                    <span
+                                                        style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">INVALID</span><br />
+                                                    <h1 id="tillDateInvalid">0</h1>
+                                                </div>
+                                                <div class="card col-md-3"
+                                                    style="text-align: center;background: #f58231; padding: 1rem; border-radius: 0px;">
+                                                    <span
+                                                        style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">REJECTED</span><br />
+                                                    <h1 id="tillDateRejected">0</h1>
+                                                </div>
+                                                <div class="card col-md-3"
+                                                    style="text-align: center;background: #ee2222; padding: 1rem; border-radius: 0px;">
+                                                    <span
+                                                        style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">REOPEN</span><br />
+                                                    <h1 id="tillDateReopen">0</h1>
+                                                </div>
+                                                <div class="card col-md-3"
+                                                    style="text-align: center;background: #7bce45; padding: 1rem; border-radius: 0px;">
+                                                    <span
+                                                        style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">RESOLVED</span><br />
+                                                    <h1 id="tillDateResolved">0</h1>
+                                                </div>
+
+                                                    <!-- <div class="card col-md-4"
+                                                        style="text-align: center;background: #454545; padding: 1rem; border-radius: 0px;">
+                                                        <span
+                                                            style="font-size: 0.9rem; font-weight: bold;font-family: 'Nunito', sans-serif;">INVALID</span><br />
+                                                        <h1 id="todayInvalid">0</h1>
+                                                    </div> -->
+
+                                                    <!-- </div> -->
+                                                    <!-- <canvas id="dist-cont-present-2" width="317" height="247" class="chartjs-render-monitor" style="display: block; width: 317px; height: 247px;"></canvas> -->
+                                                    <!-- </div> -->
+                                                </div>
+                                                <!-- <div class="col-xs-12 text-center">
+                                                    <div class="text-center label">South Present Staff</div>
+                                                    <div class="dash-graph-wrapper">
+                                                        <div class="chartjs-size-monitor">
+                                                            <div class="chartjs-size-monitor-expand">
+                                                                <div class=""></div>
+                                                            </div>
+                                                            <div class="chartjs-size-monitor-shrink">
+                                                                <div class=""></div>
+                                                            </div>
+                                                        </div>
+                                                        <canvas id="dist-cont-present-1" width="317" height="247" class="chartjs-render-monitor" style="display: block; width: 317px; height: 247px;"></canvas>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-xs-12 text-center ">
+                                                    <div class="text-center label">Total Present Staff</div>
+                                                    <div class="dash-graph-wrapper">
+                                                        <div class="chartjs-size-monitor">
+                                                            <div class="chartjs-size-monitor-expand">
+                                                                <div class=""></div>
+                                                            </div>
+                                                            <div class="chartjs-size-monitor-shrink">
+                                                                <div class=""></div>
+                                                            </div>
+                                                        </div>
+                                                        <canvas id="cont-present-pae" width="317" height="247" style="display: block; width: 317px; height: 247px;" class="chartjs-render-monitor"></canvas>
+                                                    </div>
+                                                </div> -->
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="col-xs-8">
+                                <div class="row">
+                                    <div class="col-xs-6">
+
+
+
+
+
+
+
+
+
+
+                                        <div class="dashboard-card staff-card">
+                                            <div class="tab-content">
+                                                <div class="row">
+                                                    <div class="col-xs-12 text-capitalize alert-heading">
+                                                        <i class="fa fa-user"></i> East Field staff on duty
+                                                    </div>
+                                                </div>
+
+                                                <div class="row staff-wrapper">
+                                                    <div class="col-xs-4 staff-memnber text-center">
+                                                        <div class="label">
+                                                            35 (326)
+                                                        </div>
+
+                                                        <div class="text-center member-icon" style="background-image: url(&#39;http://changyikangjie.com/images/dash-icons/cooly-driver.png&#39;)">
+
+                                                        </div>
+
+                                                        <div class="text-center label">
+                                                            Cooly Driver
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-xs-4 staff-memnber text-center">
+                                                        <div class="label">
+                                                            46 (207)
+                                                        </div>
+
+                                                        <div class="text-center member-icon" style="background-image: url(&#39;http://changyikangjie.com/images/dash-icons/driver.png&#39;)">
+
+                                                        </div>
+
+                                                        <div class="text-center label">
+                                                            Driver
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-xs-4 staff-memnber text-center">
+                                                        <div class="label">
+                                                            40 (50)
+                                                        </div>
+
+                                                        <div class="text-center member-icon" style="background-image: url(&#39;http://changyikangjie.com/images/dash-icons/muqaddam.png&#39;)">
+
+                                                        </div>
+
+                                                        <div class="text-center label">
+                                                            Muqaddam
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-xs-4 staff-memnber text-center">
+                                                        <div class="label">
+                                                            25 (40)
+                                                        </div>
+
+                                                        <div class="text-center member-icon" style="background-image: url(&#39;http://changyikangjie.com/images/dash-icons/sanitary-inspector.png&#39;)">
+
+                                                        </div>
+
+                                                        <div class="text-center label">
+                                                            Sanitary Inspector
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-xs-4 staff-memnber text-center">
+                                                        <div class="label">
+                                                            1 (4)
+                                                        </div>
+
+                                                        <div class="text-center member-icon" style="background-image: url(&#39;http://changyikangjie.com/images/dash-icons/surveyor.png&#39;)">
+
+                                                        </div>
+
+                                                        <div class="text-center label">
+                                                            Surveyor
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-xs-4 staff-memnber text-center">
+                                                        <div class="label">
+                                                            704 (1253)
+                                                        </div>
+
+                                                        <div class="text-center member-icon" style="background-image: url(&#39;http://changyikangjie.com/images/dash-icons/sanitary-worker.png&#39;)">
+
+                                                        </div>
+
+                                                        <div class="text-center label">
+                                                            Sanitary Worker
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                        <div class="dashboard-card staff-card">
+                                            <div class="tab-content">
+                                                <div class="row">
+                                                    <div class="col-xs-12 text-capitalize alert-heading">
+                                                        <i class="fa fa-user"></i> South Field staff on duty
+                                                    </div>
+                                                </div>
+
+                                                <div class="row staff-wrapper">
+                                                    <div class="col-xs-4 staff-memnber text-center">
+                                                        <div class="label">
+                                                            0 (113)
+                                                        </div>
+
+                                                        <div class="text-center member-icon" style="background-image: url(&#39;http://changyikangjie.com/images/dash-icons/cooly-driver.png&#39;)">
+
+                                                        </div>
+
+                                                        <div class="text-center label">
+                                                            Cooly Driver
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-xs-4 staff-memnber text-center">
+                                                        <div class="label">
+                                                            32 (135)
+                                                        </div>
+
+                                                        <div class="text-center member-icon" style="background-image: url(&#39;http://changyikangjie.com/images/dash-icons/driver.png&#39;)">
+
+                                                        </div>
+
+                                                        <div class="text-center label">
+                                                            Driver
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-xs-4 staff-memnber text-center">
+                                                        <div class="label">
+                                                            24 (67)
+                                                        </div>
+
+                                                        <div class="text-center member-icon" style="background-image: url(&#39;http://changyikangjie.com/images/dash-icons/muqaddam.png&#39;)">
+
+                                                        </div>
+
+                                                        <div class="text-center label">
+                                                            Muqaddam
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-xs-4 staff-memnber text-center">
+                                                        <div class="label">
+                                                            23 (47)
+                                                        </div>
+
+                                                        <div class="text-center member-icon" style="background-image: url(&#39;http://changyikangjie.com/images/dash-icons/sanitary-inspector.png&#39;)">
+
+                                                        </div>
+
+                                                        <div class="text-center label">
+                                                            Sanitary Inspector
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-xs-4 staff-memnber text-center">
+                                                        <div class="label">
+                                                            27 (31)
+                                                        </div>
+
+                                                        <div class="text-center member-icon" style="background-image: url(&#39;http://changyikangjie.com/images/dash-icons/surveyor.png&#39;)">
+
+                                                        </div>
+
+                                                        <div class="text-center label">
+                                                            Surveyor
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-xs-4 staff-memnber text-center">
+                                                        <div class="label">
+                                                            938 (1518)
+                                                        </div>
+
+                                                        <div class="text-center member-icon" style="background-image: url(&#39;http://changyikangjie.com/images/dash-icons/sanitary-worker.png&#39;)">
+
+                                                        </div>
+
+                                                        <div class="text-center label">
+                                                            Sanitary Worker
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class=" col-xs-6">
+                                        <div class="dashboard-card vehicle-category-card">
+                                            <div class="row">
+                                                <div class="col-xs-12 text-capitalize alert-heading">
+                                                    <i class="fa fa-user"></i> East Vehicles on duty
+                                                </div>
+                                            </div>
+                                            <div class="row cat-wrapper">
+
+                                                <a href="dashboard.html">
+                                                    <div class="col-xs-12 vehicle-category text-center">
+                                                        <div class="label">
+                                                            12 (26 )
+                                                        </div>
+
+                                                        <div class="text-center dashboard-vehicle-cat" style="background-image: url(&#39;http://changyikangjie.com/images/dash-icons/arm-hook.png&#39;)">
+
+                                                        </div>
+
+                                                        <div class="text-center label">
+                                                            Arm Hook
+                                                        </div>
+
+                                                    </div>
+                                                </a>
+                                                <a href="dashboard.html">
+                                                    <div class="col-xs-12 vehicle-category text-center">
+                                                        <div class="label">
+                                                            24 (32 )
+                                                        </div>
+
+                                                        <div class="text-center dashboard-vehicle-cat" style="background-image: url(&#39;http://changyikangjie.com/images/dash-icons/compactor.png&#39;)">
+
+                                                        </div>
+
+                                                        <div class="text-center label">
+                                                            Compactor
+                                                        </div>
+
+                                                    </div>
+                                                </a>
+                                                <a href="dashboard.html">
+                                                    <div class="col-xs-12 vehicle-category text-center">
+                                                        <div class="label">
+                                                            7 (94 )
+                                                        </div>
+
+                                                        <div class="text-center dashboard-vehicle-cat" style="background-image: url(&#39;http://changyikangjie.com/images/dash-icons/dumper.png&#39;)">
+
+                                                        </div>
+
+                                                        <div class="text-center label">
+                                                            Dumper
+                                                        </div>
+
+                                                    </div>
+                                                </a>
+                                                <a href="dashboard.html">
+                                                    <div class="col-xs-8 vehicle-category text-center">
+                                                        <div class="label">
+                                                            30 (43 )
+                                                        </div>
+
+                                                        <div class="text-center dashboard-vehicle-cat" style="background-image: url(&#39;http://changyikangjie.com/images/dash-icons/side-loader.png&#39;)">
+
+                                                        </div>
+
+                                                        <div class="text-center label">
+                                                            Side Loader
+                                                        </div>
+
+                                                    </div>
+                                                </a>
+                                                <a href="dashboard.html">
+                                                    <div class="col-xs-12 vehicle-category text-center">
+                                                        <div class="label">
+                                                            2 (3 )
+                                                        </div>
+
+                                                        <div class="text-center dashboard-vehicle-cat" style="background-image: url(&#39;http://changyikangjie.com/images/dash-icons/water-sprinkler.png&#39;)">
+
+                                                        </div>
+
+                                                        <div class="text-center label">
+                                                            Water Sprinkler
+                                                        </div>
+
+                                                    </div>
+                                                </a>
+                                                <a href="dashboard.html">
+                                                    <div class="col-xs-8 vehicle-category text-center">
+                                                        <div class="label">
+                                                            2 (5 )
+                                                        </div>
+
+                                                        <div class="text-center dashboard-vehicle-cat" style="background-image: url(&#39;http://changyikangjie.com/images/dash-icons/mechanical-sweeper.png&#39;)">
+
+                                                        </div>
+
+                                                        <div class="text-center label">
+                                                            Mechanical Sweeper
+                                                        </div>
+
+                                                    </div>
+                                                </a>
+                                                <a href="dashboard.html">
+                                                    <div class="col-xs-12 vehicle-category text-center">
+                                                        <div class="label">
+                                                            8 (20 )
+                                                        </div>
+
+                                                        <div class="text-center dashboard-vehicle-cat" style="background-image: url(&#39;http://changyikangjie.com/images/dash-icons/loader.png&#39;)">
+
+                                                        </div>
+
+                                                        <div class="text-center label">
+                                                            Loader
+                                                        </div>
+
+                                                    </div>
+                                                </a>
+                                                <a href="dashboard.html">
+                                                    <div class="col-xs-12 vehicle-category text-center">
+                                                        <div class="label">
+                                                            1 (2 )
+                                                        </div>
+
+                                                        <div class="text-center dashboard-vehicle-cat" style="background-image: url(&#39;http://changyikangjie.com/images/dash-icons/office-car.png&#39;)">
+
+                                                        </div>
+
+                                                        <div class="text-center label">
+                                                            Office Car
+                                                        </div>
+
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="dashboard-card vehicle-category-card">
+                                            <div class="row">
+                                                <div class="col-xs-12 text-capitalize alert-heading">
+                                                    <i class="fa fa-user"></i> South Vehicles on duty
+                                                </div>
+                                            </div>
+                                            <div class="row cat-wrapper">
+
+                                                <a href="dashboard.html">
+                                                    <div class="col-xs-12 vehicle-category text-center">
+                                                        <div class="label">
+                                                            12 (13 )
+                                                        </div>
+
+                                                        <div class="text-center dashboard-vehicle-cat" style="background-image: url(&#39;http://changyikangjie.com/images/dash-icons/arm-hook.png&#39;)">
+
+                                                        </div>
+
+                                                        <div class="text-center label">
+                                                            Arm Hook
+                                                        </div>
+
+                                                    </div>
+                                                </a>
+                                                <a href="dashboard.html">
+                                                    <div class="col-xs-12 vehicle-category text-center">
+                                                        <div class="label">
+                                                            23 (30 )
+                                                        </div>
+
+                                                        <div class="text-center dashboard-vehicle-cat" style="background-image: url(&#39;http://changyikangjie.com/images/dash-icons/compactor.png&#39;)">
+
+                                                        </div>
+
+                                                        <div class="text-center label">
+                                                            Compactor
+                                                        </div>
+
+                                                    </div>
+                                                </a>
+                                                <a href="dashboard.html">
+                                                    <div class="col-xs-12 vehicle-category text-center">
+                                                        <div class="label">
+                                                            0 (17 )
+                                                        </div>
+
+                                                        <div class="text-center dashboard-vehicle-cat" style="background-image: url(&#39;http://changyikangjie.com/images/dash-icons/dumper.png&#39;)">
+
+                                                        </div>
+
+                                                        <div class="text-center label">
+                                                            Dumper
+                                                        </div>
+
+                                                    </div>
+                                                </a>
+                                                <a href="dashboard.html">
+                                                    <div class="col-xs-8 vehicle-category text-center">
+                                                        <div class="label">
+                                                            37 (50 )
+                                                        </div>
+
+                                                        <div class="text-center dashboard-vehicle-cat" style="background-image: url(&#39;http://changyikangjie.com/images/dash-icons/side-loader.png&#39;)">
+
+                                                        </div>
+
+                                                        <div class="text-center label">
+                                                            Side Loader
+                                                        </div>
+
+                                                    </div>
+                                                </a>
+                                                <a href="dashboard.html">
+                                                    <div class="col-xs-12 vehicle-category text-center">
+                                                        <div class="label">
+                                                            0 (2 )
+                                                        </div>
+
+                                                        <div class="text-center dashboard-vehicle-cat" style="background-image: url(&#39;http://changyikangjie.com/images/dash-icons/water-sprinkler.png&#39;)">
+
+                                                        </div>
+
+                                                        <div class="text-center label">
+                                                            Water Sprinkler
+                                                        </div>
+
+                                                    </div>
+                                                </a>
+                                                <a href="dashboard.html">
+                                                    <div class="col-xs-8 vehicle-category text-center">
+                                                        <div class="label">
+                                                            3 (6 )
+                                                        </div>
+
+                                                        <div class="text-center dashboard-vehicle-cat" style="background-image: url(&#39;http://changyikangjie.com/images/dash-icons/mechanical-sweeper.png&#39;)">
+
+                                                        </div>
+
+                                                        <div class="text-center label">
+                                                            Mechanical Sweeper
+                                                        </div>
+
+                                                    </div>
+                                                </a>
+                                                <a href="dashboard.html">
+                                                    <div class="col-xs-12 vehicle-category text-center">
+                                                        <div class="label">
+                                                            2 (8 )
+                                                        </div>
+
+                                                        <div class="text-center dashboard-vehicle-cat" style="background-image: url(&#39;http://changyikangjie.com/images/dash-icons/loader.png&#39;)">
+
+                                                        </div>
+
+                                                        <div class="text-center label">
+                                                            Loader
+                                                        </div>
+
+                                                    </div>
+                                                </a>
+                                                <a href="dashboard.html">
+                                                    <div class="col-xs-12 vehicle-category text-center">
+                                                        <div class="label">
+                                                            0 (0 )
+                                                        </div>
+
+                                                        <div class="text-center dashboard-vehicle-cat" style="background-image: url(&#39;http://changyikangjie.com/images/dash-icons/office-car.png&#39;)">
+
+                                                        </div>
+
+                                                        <div class="text-center label">
+                                                            Office Car
+                                                        </div>
+
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12">
+                                        <div class="notifications-alerts dashboard-card">
+
+                                            <div class="row">
+                                                <div class="col-xs-12 text-capitalize alert-heading">
+                                                    <div class="col-xs-2">
+                                                        <a href="dashboard.html" text-uppercase ">Alerts</a>
+                                </div>
+
+                                <div class="text-right ">
+                                    <span class="notification-switch ">Bin Notification:</span>
+                                    <label class="switch btn btn-primary ">
+                                        <input id="binNotification " type="checkbox ">
+                                        <span class="slider "></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <ul class="notifications ">
+                            
+                                <li class="notification unread info vtms ">
+
+                                    <a href="dashboard.html ">
+                                        <h5 class="title ">Vehicle is Out from GTS Imtiaz</h5>
+                                        <p>
+                                             VIN: JC 18 (JV-5174) GPS:082034595690
+                                        </p>
+                                        <div class="text-muted text-right timestamp "><i class="glyphicon glyphicon-time "></i>
+                                            Mon, Jan 6, 2020 7:26 PM
+                                        </div>
+                                    </a>
+                                </li>
+                            
+                                <li class="notification unread info vtms ">
+
+                                    <a href="dashboard.html ">
+                                        <h5 class="title ">Vehicle is Out from GTS Imtiaz</h5>
+                                        <p>
+                                             VIN: GSL 20 GPS:082034702098
+                                        </p>
+                                        <div class="text-muted text-right timestamp "><i class="glyphicon glyphicon-time "></i>
+                                            Mon, Jan 6, 2020 6:40 PM
+                                        </div>
+                                    </a>
+                                </li>
+                            
+                                <li class="notification unread info vtms ">
+
+                                    <a href="dashboard.html ">
+                                        <h5 class="title ">Vehicle is Out from THE Kanta</h5>
+                                        <p>
+                                             VIN: JC 14 GPS:082034594891
+                                        </p>
+                                        <div class="text-muted text-right timestamp "><i class="glyphicon glyphicon-time "></i>
+                                            Mon, Jan 6, 2020 6:16 PM
+                                        </div>
+                                    </a>
+                                </li>
+                            
+                                <li class="notification unread info vtms ">
+
+                                    <a href="dashboard.html ">
+                                        <h5 class="title ">Vehicle is Out from THE Kanta</h5>
+                                        <p>
+                                             VIN: GSL 20 GPS:082034702098
+                                        </p>
+                                        <div class="text-muted text-right timestamp "><i class="glyphicon glyphicon-time "></i>
+                                            Mon, Jan 6, 2020 6:16 PM
+                                        </div>
+                                    </a>
+                                </li>
+                            
+                                <li class="notification unread success bin ">
+
+                                    <a href="dashboard.html ">
+                                        <h5 class="title ">Bin Successfully Picked:</h5>
+                                        <p>
+                                             BIN-LOT:kitchen wale bins near Taj complex
+                                        </p>
+                                        <div class="text-muted text-right timestamp "><i class="glyphicon glyphicon-time "></i>
+                                            Mon, Jan 6, 2020 6:12 PM
+                                        </div>
+                                    </a>
+                                </li>
+                            
+                                <li class="notification unread success bin ">
+
+                                    <a href="dashboard.html ">
+                                        <h5 class="title ">Bin Successfully Picked:</h5>
+                                        <p>
+                                             BIN-LOT:kitchen wale bins near Taj complex road
+                                        </p>
+                                        <div class="text-muted text-right timestamp "><i class="glyphicon glyphicon-time "></i>
+                                            Mon, Jan 6, 2020 6:12 PM
+                                        </div>
+                                    </a>
+                                </li>
+                            
+                                <li class="notification unread success bin ">
+
+                                    <a href="dashboard.html ">
+                                        <h5 class="title ">Bin Successfully Picked:</h5>
+                                        <p>
+                                             BIN-LOT:taj complex road kitchen wale dusbins
+                                        </p>
+                                        <div class="text-muted text-right timestamp "><i class="glyphicon glyphicon-time "></i>
+                                            Mon, Jan 6, 2020 6:12 PM
+                                        </div>
+                                    </a>
+                                </li>
+                            
+                                <li class="notification unread success bin ">
+
+                                    <a href="dashboard.html ">
+                                        <h5 class="title ">Bin Successfully Picked:</h5>
+                                        <p>
+                                             BIN-LOT:kitchen wale bins near Taj complex road
+                                        </p>
+                                        <div class="text-muted text-right timestamp "><i class="glyphicon glyphicon-time "></i>
+                                            Mon, Jan 6, 2020 6:12 PM
+                                        </div>
+                                    </a>
+                                </li>
+                            
+                                <li class="notification unread success bin ">
+
+                                    <a href="dashboard.html ">
+                                        <h5 class="title ">Bin Successfully Picked:</h5>
+                                        <p>
+                                             BIN-LOT:taj complex road
+                                        </p>
+                                        <div class="text-muted text-right timestamp "><i class="glyphicon glyphicon-time "></i>
+                                            Mon, Jan 6, 2020 6:12 PM
+                                        </div>
+                                    </a>
+                                </li>
+                            
+                                <li class="notification unread success bin ">
+
+                                    <a href="dashboard.html ">
+                                        <h5 class="title ">Bin Successfully Picked:</h5>
+                                        <p>
+                                             BIN-LOT:taj complex road
+                                        </p>
+                                        <div class="text-muted text-right timestamp "><i class="glyphicon glyphicon-time "></i>
+                                            Mon, Jan 6, 2020 6:12 PM
+                                        </div>
+                                    </a>
+                                </li>
+                            
+                                <li class="notification unread success bin ">
+
+                                    <a href="dashboard.html ">
+                                        <h5 class="title ">Bin Successfully Picked:</h5>
+                                        <p>
+                                             BIN-LOT:taj complex road kitchen wale dusbins
+                                        </p>
+                                        <div class="text-muted text-right timestamp "><i class="glyphicon glyphicon-time "></i>
+                                            Mon, Jan 6, 2020 6:12 PM
+                                        </div>
+                                    </a>
+                                </li>
+                            
+                                <li class="notification unread success bin ">
+
+                                    <a href="dashboard.html ">
+                                        <h5 class="title ">Bin Successfully Picked:</h5>
+                                        <p>
+                                             BIN-LOT:taj complex road kitchen wale dusbins
+                                        </p>
+                                        <div class="text-muted text-right timestamp "><i class="glyphicon glyphicon-time "></i>
+                                            Mon, Jan 6, 2020 6:12 PM
+                                        </div>
+                                    </a>
+                                </li>
+                            
+                                <li class="notification unread success bin ">
+
+                                    <a href="dashboard.html ">
+                                        <h5 class="title ">Bin Successfully Picked:</h5>
+                                        <p>
+                                             BIN-LOT:taj complex road kitchen wale dusbins
+                                        </p>
+                                        <div class="text-muted text-right timestamp "><i class="glyphicon glyphicon-time "></i>
+                                            Mon, Jan 6, 2020 6:12 PM
+                                        </div>
+                                    </a>
+                                </li>
+                            
+                                <li class="notification unread success bin ">
+
+                                    <a href="dashboard.html ">
+                                        <h5 class="title ">Bin Successfully Picked:</h5>
+                                        <p>
+                                             BIN-LOT:taj complex road
+                                        </p>
+                                        <div class="text-muted text-right timestamp "><i class="glyphicon glyphicon-time "></i>
+                                            Mon, Jan 6, 2020 6:11 PM
+                                        </div>
+                                    </a>
+                                </li>
+                            
+                                <li class="notification unread success bin ">
+
+                                    <a href="dashboard.html ">
+                                        <h5 class="title ">Bin Successfully Picked:</h5>
+                                        <p>
+                                             BIN-LOT:taj complex road
+                                        </p>
+                                        <div class="text-muted text-right timestamp "><i class="glyphicon glyphicon-time "></i>
+                                            Mon, Jan 6, 2020 6:11 PM
+                                        </div>
+                                    </a>
+                                </li>
+                                                    </ul>
+
+                    </div>
+                </div>
+            </div>
+                    <!-- Small boxes (Stat box) -->
+
+                </div>
+                <!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer ">
+            <strong>Copyright &copy; 2019 <a href="# ">Matz Solutions</a>.</strong> All rights reserved.
+            <!-- <div class="float-right d-none d-sm-inline-block ">
+      <b>Version</b> 3.0.0-rc.1
+    </div> -->
+        </footer>
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark ">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- jQuery -->
+    <script src="../plugins/jquery/jquery.min.js "></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="../plugins/jquery-ui/jquery-ui.min.js "></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button)
+    </script>
+    <!-- Bootstrap 4 -->
+    <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js "></script>
+    <!-- ChartJS -->
+    <script src="../plugins/chart.js/Chart.min.js "></script>
+    <!-- Sparkline -->
+    <!-- <script src="../plugins/sparklines/sparkline.js "></script> -->
+    <!-- JQVMap -->
+    <!-- <script src="../plugins/jqvmap/jquery.vmap.min.js "></script> -->
+    <!-- <script src="../plugins/jqvmap/maps/jquery.vmap.world.js "></script> -->
+    <!-- jQuery Knob Chart -->
+    <!-- <script src="../plugins/jquery-knob/jquery.knob.min.js "></script> -->
+    <!-- daterangepicker -->
+    <!-- <script src="../plugins/moment/moment.min.js "></script> -->
+    <!-- <script src="../plugins/daterangepicker/daterangepicker.js "></script> -->
+    <!-- Tempusdominus Bootstrap 4 -->
+    <!-- <script src="../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js "></script> -->
+    <!-- Summernote -->
+    <!-- <script src="../plugins/summernote/summernote-bs4.min.js "></script> -->
+    <!-- overlayScrollbars -->
+    <script src="../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js "></script>
+    <!-- AdminLTE App -->
+    <script src="../dist/js/adminlte.js "></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <!-- <script src="../dist/js/pages/dashboard.js "></script> -->
+    <!-- AdminLTE for demo purposes -->
+    <script src="../dist/js/demo.js "></script>
+    <script src="../dist/js/sidebar.js "></script>
+    <script src="../dist/js/chart.js "></script>
+    <script src="my_files/app.js.download "></script>
+        <!-- <script type="text/javascript " src="./assets/scripts/main.js "></script> -->
+    <!-- <script type="text/javascript " src="./assets/scripts/myscript.js "></script> -->
+    <!-- <script src="../vendor/jquery/jquery-3.2.1.min.js "></script> -->
+    <script src="../js/firebase.js "></script>
+    <script>
+            // var dateTemp = new Date(2018, 8, 24, 10, 33, 30);
+            // var monthArray = Array();
+            // month = dateTemp.getMonth();
+            // for (iter = 0; iter < 12; iter++) {
+            //   monthArray[iter] = ''+
+            //   console.log(month);
+            //   month -= 1;
+            //   if (month <= 0) month = 12;
+            // }
+
+            var last12Month = function() {
+                var dates = [];
+                var today = new Date();
+                (d = new Date()), (y = d.getFullYear()), (m = d.getMonth());
+
+                function padMonth(month) {
+                    if (month < 10) return"0" + month;
+                    else return month;
+                }
+                if (m === 11) {
+                    for (var i = 1; i < 13; i++) dates.push(y +"-" + padMonth(i));
+                } else {
+                    for (var i = m + 1; i < m + 13; i++) {
+                        if (i % 12 > m) dates.push(y - 1 +"-" + padMonth(i + 1));
+                        else dates.push(y +"-" + padMonth((i % 12) + 1));
+                    }
+                }
+
+                return dates;
+            };
+            // console.log(last12Month());
+            var last12Active = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+            var last12Assigned = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+            var last12Invalid = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+            var last12Rejected = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+            var last12Reopen = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+            var last12Resolved = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+            var last12Months = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+            last12Months = last12Month();
+            console.log(last12Months);
+            // // console.log(
+            // //   last12Months.indexOf("2019-10") >= 0
+            // //     ? last12Months.indexOf("2019-10")
+            // //     :""
+            // // );
+
+            var active = 0;
+            var assigned = 0;
+            var resolved = 0;
+            var rejected = 0;
+            var reopen = 0;
+            var invalid = 0;
+            var total = 0;
+
+            var activeCM = 0;
+            var assignedCM = 0;
+            var resolvedCM = 0;
+            var rejectedCM = 0;
+            var reopenCM = 0;
+            var invalidCM = 0;
+            var totalCM = 0;
+
+            var activeToday = 0;
+            var assignedToday = 0;
+            var resolvedToday = 0;
+            var rejectedToday = 0;
+            var reopenToday = 0;
+            var invalidToday = 0;
+            var totalToday = 0;
+
+            var database = firebase.database();
+            var date = new Date();
+            var currentMonth = parseInt(date.getMonth()) + 1;
+            if(currentMonth.toString().length < 2)
+                currentMonth = '0' + currentMonth;
+            console.log(currentMonth);
+            var currentMonth1 = parseInt(date.getMonth()) + 1;
+            var today =
+                date.getFullYear() +"/" + currentMonth +"/" + date.getDate();
+            // console.log(userId)
+            database.ref("users/").on("value", function(snapshot) {
+                // setTimeout(() => {
+                // last12Active = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                // last12Assigned = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                // last12Invalid = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                // last12Rejected = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                // last12Reopen = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                // last12Resolved = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                // last12Months = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+                active = 0;
+                assigned = 0;
+                resolved = 0;
+                rejected = 0;
+                reopen = 0;
+                invalid = 0;
+                total = 0;
+
+                activeCM = 0;
+                assignedCM = 0;
+                resolvedCM = 0;
+                rejectedCM = 0;
+                reopenCM = 0;
+                invalidCM = 0;
+                totalCM = 0;
+
+                activeToday = 0;
+                assignedToday = 0;
+                resolvedToday = 0;
+                rejectedToday = 0;
+                reopenToday = 0;
+                invalidToday = 0;
+                totalToday = 0;
+                // }, 100);
+
+                if (snapshot.exists()) {
+                    var content ="";
+                    // $('#list_complaint').html(content);
+                    // var i = 1;
+                    snapshot.forEach(function(data) {
+                        // i++;
+                        // var val = data.val();
+                        var key = data.key;
+                        // console.log(val2);
+                        database.ref("users/" + key +"/").on("value", function(snapshot1) {
+                            if (snapshot1.exists()) {
+                                var currentDate ="";
+                                // var content ="";
+                                snapshot1.forEach(function(data1) {
+                                    var val = data1.val();
+                                    status = isset(val.status) ? val.status :"ACTIVE";
+                                    // console.log(val.complainNumber + ' | ' + val.currentDate + ' | ' + status);
+                                    // if (status != 'RESOLVED' && status != 'REJECTED' && status != 'INVALID') {
+                                    total = parseInt(total) + 1;
+                                    if (status =="ACTIVE") active = parseInt(active) + 1;
+                                    else if (status =="ASSIGNED")
+                                        assigned = parseInt(assigned) + 1;
+                                    else if (status =="RESOLVED")
+                                        resolved = parseInt(resolved) + 1;
+                                    else if (status =="REJECTED")
+                                        rejected = parseInt(rejected) + 1;
+                                    else if (status =="REOPEN") reopen = parseInt(reopen) + 1;
+                                    else if (status =="INVALID") invalid = parseInt(invalid) + 1;
+                                    currentDate = val.currentDate.split(" ")[0].split("/")[1];
+                                    // console.log(currentDate + ' | ' + currentMonth1 + ' | ' + status);
+                                    if (currentDate == currentMonth1) {
+                                        totalCM = parseInt(totalCM) + 1;
+                                        if (status =="ACTIVE") activeCM = parseInt(activeCM) + 1;
+                                        else if (status =="ASSIGNED")
+                                            assignedCM = parseInt(assignedCM) + 1;
+                                        else if (status =="RESOLVED")
+                                            resolvedCM = parseInt(resolvedCM) + 1;
+                                        else if (status =="REJECTED")
+                                            rejectedCM = parseInt(rejectedCM) + 1;
+                                        else if (status =="REOPEN") {
+                                            reopenCM = parseInt(reopenCM) + 1;
+                                        } else if (status =="INVALID")
+                                            invalidCM = parseInt(invalidCM) + 1;
+                                    }
+                                    currentMonth = val.currentDate.split(" ")[0].split("/")[1];
+                                    // if(currentMonth.toString().length < 2)
+                                    //     currentMonth = '0' + currentMonth;
+                                    currentYear = val.currentDate.split(" ")[0].split("/")[0];
+                                    // console.log(last12Months);
+                                    console.log(currentYear +"-" + currentMonth);
+                                    if (
+                                        last12Months.indexOf(currentYear +"-" + currentMonth) >= 0
+                                    ) {
+                                        // console.log(val.currentDate);
+                                        if (status =="ACTIVE") {
+                                            last12Active[
+                                                last12Months.indexOf(currentYear +"-" + currentMonth)
+                                            ]++;
+                                        } else if (status =="ASSIGNED") {
+                                            // assignedToday = parseInt(assignedToday) + 1;
+                                            last12Assigned[
+                                                last12Months.indexOf(currentYear +"-" + currentMonth)
+                                            ]++;
+                                        } else if (status =="RESOLVED") {
+                                            // resolvedToday = parseInt(resolvedToday) + 1;
+                                            last12Resolved[
+                                                last12Months.indexOf(currentYear +"-" + currentMonth)
+                                            ]++;
+                                        } else if (status =="REJECTED") {
+                                            // rejectedToday = parseInt(rejectedToday) + 1;
+                                            last12Rejected[
+                                                last12Months.indexOf(currentYear +"-" + currentMonth)
+                                            ]++;
+                                        } else if (status =="REOPEN") {
+                                            // reopenToday = parseInt(reopenToday) + 1;
+                                            last12Reopen[
+                                                last12Months.indexOf(currentYear +"-" + currentMonth)
+                                            ]++;
+                                        } else if (status =="INVALID") {
+                                            // invalidToday = parseInt(invalidToday) + 1;
+                                            last12Invalid[
+                                                last12Months.indexOf(currentYear +"-" + currentMonth)
+                                            ]++;
+                                        }
+                                    }
+                                    // console.log(last12Active);
+                                    currentDate = val.currentDate.split(" ")[0];
+                                    // console.log(currentDate + ' | ' + today);
+                                    if (currentDate == today) {
+                                        totalToday = parseInt(totalToday) + 1;
+                                        if (status =="ACTIVE")
+                                            activeToday = parseInt(activeToday) + 1;
+                                        else if (status =="ASSIGNED")
+                                            assignedToday = parseInt(assignedToday) + 1;
+                                        else if (status =="RESOLVED")
+                                            resolvedToday = parseInt(resolvedToday) + 1;
+                                        else if (status =="REJECTED")
+                                            rejectedToday = parseInt(rejectedToday) + 1;
+                                        else if (status =="REOPEN")
+                                            reopenToday = parseInt(reopenToday) + 1;
+                                        else if (status =="INVALID")
+                                            invalidToday = parseInt(invalidToday) + 1;
+                                    }
+                                });
+                                // console.log(content);
+                                $("#todayTotal").html(totalToday);
+                                $("#todayActive").html(activeToday);
+                                $("#todayAssigned").html(assignedToday);
+                                $("#todayResolved").html(resolvedToday);
+                                $("#todayRejected").html(rejectedToday);
+                                $("#todayReopen").html(reopenToday);
+                                $("#todayInvalid").html(invalidToday);
+
+                                $("#monthTotal").html(totalCM);
+                                $("#monthActive").html(activeCM);
+                                $("#monthAssigned").html(assignedCM);
+                                $("#monthResolved").html(resolvedCM);
+                                $("#monthRejected").html(rejectedCM);
+                                $("#monthReopen").html(reopenCM);
+                                $("#monthInvalid").html(invalidCM);
+
+                                $("#tillDateTotal").html(total);
+                                $("#tillDateActive").html(active);
+                                $("#tillDateAssigned").html(assigned);
+                                $("#tillDateResolved").html(resolved);
+                                $("#tillDateRejected").html(rejected);
+                                $("#tillDateReopen").html(reopen);
+                                $("#tillDateInvalid").html(invalid);
+                            }
+                        });
+                    });
+                }
+                // drawGraph();
+                // // window.open('dashboard.html', '')
+                // // location.reload(false);
+                // setTimeout(() => {
+                //     last12Active = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                //     last12Assigned = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                //     last12Invalid = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                //     last12Rejected = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                //     last12Reopen = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                //     last12Resolved = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                //     last12Months = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                // }, 100);
+
+            });
+
+            function isset(ref) {
+                return typeof ref !=="undefined";
+            }
+        </script>
+    <script>
+        $(document).ready(function() {
+
+            $.ajax({
+                type: 'POST',
+                url: 'assets/plugin/header.php',
+                success: function(data) {
+                    document.getElementById('mynavbar').innerHTML = data;
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

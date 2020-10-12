@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Language" content="en" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Admin Panel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+    <meta name="description" content="This is an example dashboard created using build-in elements and components." />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <!--
+    =========================================================
+    * ArchitectUI HTML Theme Dashboard - v1.0.0
+    =========================================================
+    * Product Page: https://dashboardpack.com
+    * Copyright 2019 DashboardPack (https://dashboardpack.com)
+    * Licensed under MIT (https://github.com/DashboardPack/architectui-html-theme-free/blob/master/LICENSE)
+    =========================================================
+    * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+    -->
+    <link href="./main.css" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-auth.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-database.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-storage.js"></script>
+
+</head>
+
+<body>
+    <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
+        <div class="app-header header-shadow">
+            <div class="app-header__logo">
+                <div class="logo-src"></div>
+                <div class="header__pane ml-auto">
+                    <div>
+                        <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="app-header__mobile-menu">
+                <div>
+                    <button type="button" class="hamburger hamburger--elastic mobile-toggle-nav">
+                        <span class="hamburger-box">
+                            <span class="hamburger-inner"></span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+            <div class="app-header__menu">
+                <span>
+                    <button type="button"
+                        class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
+                        <span class="btn-icon-wrapper">
+                            <i class="fa fa-ellipsis-v fa-w-6"></i>
+                        </span>
+                </button>
+                </span>
+            </div>
+            <div class="app-header__content">
+                <div class="app-header-right">
+                    <div class="header-btn-lg pr-0">
+                        <div class="widget-content p-0">
+                            <div class="widget-content-wrapper">
+                                <div class="widget-content-left">
+                                    <div class="btn-group">
+                                        <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
+                                            <i class="fa fa-angle-down ml-2 opacity-8"></i>
+                                        </a>
+                                        <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
+                                            <div tabindex="-1" class="dropdown-divider"></div>
+                                            <button type="button" tabindex="0" class="dropdown-item">Logout</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="widget-content-left  ml-3 header-user-info">
+                                    <div class="widget-heading">
+                                        Admin
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="app-main">
+            <div class="app-sidebar sidebar-shadow">
+                <div class="scrollbar-sidebar">
+                    <div class="app-sidebar__inner">
+                        <ul class="vertical-nav-menu">
+                            <li class="app-sidebar__heading">Dashboards</li>
+                            <li>
+                                <a href="dashboard.html">
+                                    <i class="metismenu-icon pe-7s-rocket"></i> Dashboard
+                                </a>
+                            </li>
+                            <li>
+                                <a href="tickets.html" class="mm-active">
+                                    <i class="metismenu-icon pe-7s-diamond"></i> Tickets
+                                </a>
+                            </li>
+                            <li>
+                                <a href="report.html">
+                                    <i class="metismenu-icon pe-7s-car"></i> Reports
+                                </a>
+                            </li>
+                            <li>
+                                <a href="duereport.html">
+                                    <i class="metismenu-icon pe-7s-display2"></i> Due Assignment Report
+                                </a>
+                            </li>
+                            <li>
+                                <a href="graphs.html">
+                                    <i class="metismenu-icon pe-7s-mouse">
+                                    </i>Graphical Reports
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="app-main__outer">
+                <div class="app-main__inner">
+                    <div class="app-page-title">
+                        <div class="page-title-wrapper">
+                            <div class="page-title-heading">
+                                <input type="number" class="form-control" id="searchInput" onkeyup="searchFilterTicket()" name="" placeholder="Search By Contact"> &nbsp;
+                            </div>
+                            <div class="page-title-actions">
+                                <button class="btn btn-primary" onclick="printDiv('printableArea')">Print</button>
+                                <div class="d-inline-block dropdown">
+                                    <button class="btn btn-primary" data-toggle="modal" data-target="#complaintmodal">Add Complaints</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="main-card mb-3 card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Tickets</h5>
+                                    <div id="printableArea">
+                                        <!-- <div class="table-responsive" id="printableArea"> -->
+                                        <table class="mb-0 table table-hover" id="list_complaint1">
+                                            <thead>
+                                                <tr>
+                                                    <!-- <th>S#</th> -->
+                                                    <th>Complaint#</th>
+                                                    <th>Date of Complaint</th>
+                                                    <th>Time</th>
+                                                    <th>Complaint Name</th>
+                                                    <th>Complaint Contact</th>
+                                                    <th>Name of UC | Address</th>
+                                                    <th>Description</th>
+                                                    <th>Surveyor Name</th>
+                                                    <th>Status</th>
+                                                    <th>Image</th>
+                                                    <th>Image Before</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="list_complaint">
+                                                <!-- <tr onclick="window.open('addcomplain.html','_self');">
+                                                    <th>1</th>
+                                                    <th>2</th>
+                                                    <th>3</th>
+                                                    <th>4</th>
+                                                    <th>5</th>
+                                                    <th>6</th>
+                                                    <th>7</th>
+                                                    <th>8</th>
+                                                    <th>9</th>
+                                                    <th>10</th>
+                                                    <th>11</th>
+                                                    <th>12</th>
+                                                </tr> -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="app-wrapper-footer">
+                    <div class="app-footer">
+                        <div class="app-footer__inner">
+                            <div class="app-footer-left">
+                                <ul class="nav">
+                                    <li class="nav-item">
+                                        <a href="javascript:void(0);" class="nav-link">
+                                            Copy Rights MATZ Solutions
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="./assets/scripts/main.js"></script>
+
+
+    <!-- Modal for Complaint Number -->
+    <div>
+        <div class="modal fade" id="complaintmodal" tabindex="-1" role="dialog" aria-labelledby="complaintmodalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="complaintmodalLabel">Add Complaint</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- <form id="addDepartment" class="needs-validation" novalidate action="addcomplain.html" method="post"> -->
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <input type="number" class="form-control" name="contact" id="contact" placeholder="Contact" value="" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a type="" href="javascript:addComplain()" name="" class="btn btn-primary" onclick="addComplain(); return false;">Add</a>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="">Close</button>
+                            <!-- </form> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+
+<script type="text/javascript" src="assets/scripts/main.js"></script>
+<script type="text/javascript" src="assets/scripts/myscript.js"></script>
+<script src="../vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="../js/firebase.js"></script>
+<script>
+    function addComplain() {
+        var encrypted = CryptoJS.AES.encrypt(
+            document.getElementById("contact").value,
+            "secret"
+        );
+        // console.log(encrypted.toString());
+        window.open("addcomplain.html?id=" + encrypted.toString(), "_blank");
+    }
+
+
+    var flag = 0;
+    var database = firebase.database();
+    // console.log(userId)
+    database.ref('users/').on('value', function(snapshot) {
+        if (snapshot.exists()) {
+            var content = '';
+            // $('#list_complaint').html(content);
+            var i = 1;
+            snapshot.forEach(function(data) {
+                // i++;
+                // var val = data.val();
+                var key = data.key;
+                // console.log(val2);
+                // database.ref(`users/${key}/`).on('value', function(snapshot1) {
+                database.ref("users/" + key + "/").on("value", function(snapshot1) {
+                    // setTimeout(() => {
+                    // $('#list_complaint').html(content);
+                    // }, 100);
+                    // var content = '';
+                    if (snapshot1.exists()) {
+                        // var content = '';
+                        snapshot1.forEach(function(data1) {
+                            // var content = '';
+                            var val = data1.val();
+                            // console.log(val);
+                            url = "'edit.html?id=" + data1.key + "'";
+                            target = "'_self'";
+                            content += '<tr>';
+                            // content += '<td>' + i + '</td>';
+                            content += '<td style="cursor: pointer;" onclick="window.open(' + url + ', ' + target + ');">';
+                            content += (isset(val.complainNumber)) ? val.complainNumber : '';
+                            content += '</td>';
+                            content += '<td style="cursor: pointer;" onclick="window.open(' + url + ', ' + target + ');">'
+                            content += (isset(val.currentDate)) ? formatDate(new Date(val.currentDate)) : '';
+                            content += '</td>';
+                            content += '<td style="cursor: pointer;" onclick="window.open(' + url + ', ' + target + ');">'
+                            content += (isset(val.currentDate)) ? formatTime(new Date(val.currentDate)) : '';
+                            // content += (isset(val.currentDate)) ? (isset(val.currentDate.split(" ")[1])) ? formatTime(new Date(val.currentDate)) : '' : '';
+                            content += '</td>';
+                            content += '<td style="cursor: pointer;" onclick="window.open(' + url + ', ' + target + ');">' + val.name + '</td>';
+                            // content += '<td>' + '<img height="100" src="' + val.productimage + '">' + '</td>';
+                            content += '<td style="cursor: pointer;" onclick="window.open(' + url + ', ' + target + ');">' + val.phoneNumber + '</td>';
+                            // document.getElementById('district').value = (isset(val.district)) ? val.district : '';
+                            // districtChanged();
+                            // document.getElementById('zone_id').value = (isset(val.zone_id)) ? val.zone_id : '';
+                            // zoneChanged();
+                            // document.getElementById('uc').value = (isset(val.uc)) ? val.uc : '';
+                            // var temp = (isset(val.zone_id) && isset(val.uc) && val.uc != '' && val.zone_id != '') ? val.zone_id + '|' + val.uc : '-';
+                            // console.log(val.complainNumber + '|' + temp);
+                            // if (val.uc == 52 && val.zone_id == 3) console.log(key + '|' + data1.key);
+                            uc = (isset(val.zone_id) && isset(val.uc) && val.uc != '' && val.zone_id != '') ? findUC(val.zone_id, val.uc) : '-';
+                            content += '<td style="cursor: pointer;" onclick="window.open(' + url + ', ' + target + ');">';
+                            content += uc;
+                            content += ' | ';
+                            content += (isset(val.district)) ? val.district : '-';
+                            content += '</td>';
+                            // content += '<td>';
+                            // content += (isset(val.type)) ? val.type : '';
+                            // content += '</td>';
+                            content += '<td style="cursor: pointer;" onclick="window.open(' + url + ', ' + target + ');">';
+                            content += (isset(val.CompainType)) ? val.CompainType : '';
+                            content += '</td>';
+                            content += '<td style="cursor: pointer;" onclick="window.open(' + url + ', ' + target + ');">';
+                            content += (isset(val.supervisor)) ? val.supervisor : '';
+                            content += '</td>';
+                            content += '<td style="cursor: pointer;" onclick="window.open(' + url + ', ' + target + ');">';
+                            if (isset(val.status))
+                                content += val.status;
+                            else
+                                content += 'ACTIVE';
+                            content += '</td>';
+                            content += '<td>';
+                            content += (isset(val.photoUriAdmin) && val.photoUriAdmin != '') ? '<a href="' + val.photoUriAdmin + '" target="_blank"><img src="' : '';
+                            // content += 
+                            content += (isset(val.photoUriAdmin) && val.photoUriAdmin != '') ? val.photoUriAdmin + '" height="80px" width="80px"></a>' : '-';
+                            content += '</td>';
+                            content += '<td>';
+                            content += (isset(val.photoUri) && val.photoUri != '') ? '<a href="' + val.photoUri + '" target="_blank"><img src="' : '';
+                            // content += 
+                            content += (isset(val.photoUri) && val.photoUri != '') ? val.photoUri + '" height="80px" width="80px"></a>' : '-';
+                            content += '</td>';
+
+                            content += '</tr>';
+                            i++;
+                        });
+                        // $('#list_complaint').html(content);
+                        // $('#list_complaint').append(content);
+                        // content = '';
+                        // console.log('new entry ' + i);
+                        // console.log(content);
+                    }
+                });
+            });
+            $('#list_complaint').html(content);
+            if (flag == 1) {
+                location.reload(true);
+            }
+            SortTable(0, 'T');
+            flag = 1;
+        }
+        // SortTable(0, 'D', 'ymd');
+        // $('#list_complaint').append(content);
+
+        // SortTable(0, 'T');
+        // SortTable(3, 'T');
+        // location.reload();
+    });
+
+
+    function isset(ref) {
+        return typeof ref !== 'undefined';
+    }
+</script>
+
+<script>
+    var TableIDvalue = "list_complaint1";
+    var TableLastSortedColumn = -1;
+</script>
+
+
+</html>
